@@ -1,0 +1,101 @@
+#| Rohaan's Kanata Config 
+This config only targets the built-in keyboard on my laptop 
+Provides mod tap functionality and additional function layers 
+|# 
+ 
+#| Global settings for targeting the built-in laptop keyboard 
+   Targeting Laptop works as expected on Linux 
+   Interception driver on Windows causes issues with game anti-cheats and is commented out as a result. 
+|# 
+(defcfg
+  linux-dev-names-include(
+    "PRiMAX HP FY23 OMEN 16 KBM Keyboard" 
+    "PRiMAX HP FY23 OMEN 16 KBM Keypad" 
+    "PRiMAX HP FY23 OMEN 16 KBM Consumer" 
+  ) 
+)
+
+;;(defcfg
+  ;;windows-interception-keyboard-hwids (
+    ;;"72, 0, 73, 0, 68, 0, 92, 0, 86, 0, 73, 0, 68, 0, 95, 0, 48, 0, 52, 0, 54, 0, 49, 0, 38, 0, 80, 0, 73, 0, 68, 0, 95, 0, 52, 0, 70, 0, 49, 0, 69, 0, 38, 0, 82, 0, 69, 0, 86, 0, 95, 0, 48, 0, 50, 0, 48, 0, 49, 0, 38, 0, 77, 0, 73, 0, 95, 0, 48, 0, 49, 0, 38, 0, 67, 0, 111, 0, 108, 0, 48, 0, 49, 0, 0, 0, 72, 0, 73, 0, 68, 0, 92, 0, 86, 0, 73, 0, 68, 0, 95, 0, 48, 0, 52, 0, 54, 0, 49, 0, 38, 0, 80, 0, 73, 0, 68, 0, 95, 0, 52, 0, 70, 0, 49, 0, 69, 0, 38, 0, 77, 0, 73, 0, 95, 0, 48, 0, 49, 0, 38, 0, 67, 0, 111, 0, 108, 0, 48, 0, 49, 0, 0, 0, 72, 0, 73, 0, 68, 0, 92, 0, 86, 0, 73, 0, 68, 0, 95, 0, 48, 0, 52, 0, 54, 0, 49, 0, 38, 0, 85, 0, 80, 0, 58, 0, 48, 0, 48, 0, 48, 0, 49, 0, 95, 0, 85, 0, 58, 0, 48, 0, 48, 0, 48, 0, 55, 0, 0, 0, 72, 0, 73, 0, 68, 0, 95, 0, 68, 0, 69, 0, 86, 0, 73, 0, 67, 0, 69, 0, 95, 0, 83, 0, 89, 0, 83, 0, 84, 0, 69, 0, 77, 0, 95, 0, 75, 0, 69, 0, 89, 0, 66, 0, 79, 0, 65, 0, 82, 0, 68, 0, 0, 0, 72, 0, 73, 0, 68, 0, 95, 0, 68, 0, 69, 0, 86, 0, 73, 0, 67, 0, 69, 0, 95, 0, 85, 0, 80, 0, 58, 0, 48, 0, 48, 0, 48, 0, 49, 0, 95, 0, 85, 0, 58, 0, 48, 0, 48, 0, 48, 0, 55, 0, 0, 0, 72, 0, 73, 0, 68, 0, 95, 0, 68, 0, 69, 0, 86, 0, 73, 0, 67, 0, 69, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0"
+  ;;)
+;;)
+
+;; Timeouts
+(defvar
+  tapRepressTimeout 1000
+  holdTimeout       1500
+  tapTimeout        $tapRepressTimeout
+  holdKeyTimeout    $holdTimeout
+)
+
+;; Aliases for layers
+(defalias fn1 (layer-toggle fn1Layer))
+(defalias fn2 (layer-while-held fn2Layer))
+
+;; Defining the default keymap 
+(defsrc
+  esc  f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12  del
+  grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
+  tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
+  caps a    s    d    f    g    h    j    k    l    ;    '    ret
+  lsft z    x    c    v    b    n    m    ,    .    /    rsft
+  lctl lmet lalt           spc            ralt menu rctl
+  f13 calc prtsc
+  ins  home pgup
+  pause end  pgdn
+)
+
+;; Mod-tap definitions
+;;tap = Esc, hold = FN1 layer
+(defalias
+  escModTap (tap-hold-release $tapTimeout $holdKeyTimeout esc @fn1)
+)
+;;tap = caps lock, hold = FN1 layer
+(defalias 
+  capsLockModTap (tap-hold-release $tapTimeout $holdKeyTimeout caps @fn1) 
+) 
+;;tap = space, hold = FN2 layer
+;;(defalias
+  ;;spaceModTap (tap-hold-release $tapTimeout $holdKeyTimeout spc @fn2)
+;;) 
+
+
+;; Define the base layer for the keyboard
+(deflayer base 
+  esc  f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12  del
+  grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
+  tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
+  @escModTap a    s    d    f    g    h    j    k    l    ;    '    ret
+  lsft z    x    c    v    b    n    m    ,    .    /    rsft
+  lctl lmet lalt           spc            ralt @capsLockModTap rctl
+  f13 calc prtsc
+  ins  home pgup
+  pause end  pgdn
+)
+
+;; Define the first function layer (f2/f3, menu/rctl map to brightness up/down [not working]) 
+(deflayer fn1Layer
+  XX  XX   f2   f3   XX   XX   XX   XX   XX   XX   XX  XX  XX  XX
+  grv  1    prev    pp    next    XX    XX    XX    XX    XX    XX    XX    XX    bspc
+  tab  home    up    end    pgup    XX    XX    XX    XX    XX    XX    XX    XX    XX
+  @escModTap left    down    right    pgdn    lsft    h    prev    pp    next    ;    '    ret
+  lsft mute    vold    volu    XX    lctl    XX    mute    vold    volu    /    rsft
+  lctl lmet lalt           @fn2            XX @capsLockModTap rctl
+  f13 calc prtsc
+  ins  home pgup
+  pause end  pgdn
+)
+
+;;Define  the second function layer
+(deflayer fn2Layer
+  XX  kp/   kp*   kp-   kp+   XX   XX   XX   XX   XX   XX  XX  XX  XX
+  XX  7    8    9    XX    XX    XX    XX    XX    XX    XX    XX    XX    bspc
+  tab  4    5    6    XX    XX    XX    XX    XX    XX    XX    XX    XX    XX
+  @escModTap 1    2    3    XX    XX    XX    XX    XX    XX    XX    XX    ret
+  lsft ret    .    0    XX    XX    XX    XX    XX    XX    XX    XX
+  lctl lmet lalt           @fn2            XX @capsLockModTap XX
+  f13 calc prtsc
+  ins  home pgup
+  pause end  pgdn
+)

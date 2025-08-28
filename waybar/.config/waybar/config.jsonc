@@ -1,0 +1,199 @@
+{
+	// Positioning rules
+	"layer": "top",
+	"position": "top",
+	"height": 16,
+	"spacing": 4,
+	"margin-top": 5,
+	"margin-left": 10,
+	"margin-right": 10,
+    
+	// Module layout
+	"modules-left": ["hyprland/workspaces"],
+	"modules-center": ["hyprland/window"],
+	"modules-right": [
+	"tray",
+	"pulseaudio",
+	"network", 
+	"backlight",
+	"battery",
+	"clock",
+	"idle_inhibitor",
+	],
+    
+	// Workspace configuration
+	"hyprland/workspaces": {
+	"disable-scroll": true,
+	"all-outputs": true,
+	"warp-on-scroll": false,
+	"format": "{icon}",
+	"format-icons": {
+        	"1": "󰲠",
+        	"2": "󰲢", 
+        	"3": "󰲤",
+        	"4": "󰲦",
+        	"5": "󰲨",
+        	"6": "󰲪",
+        	"7": "󰲬",
+        	"8": "󰲮",
+        	"9": "󰲰",
+        	"10": "󰿬",
+        	"active": "󰮯",
+        	"default": "󰧞"
+	},
+	"persistent-workspaces": {
+        	"*": 5 // Show 5 workspaces on all monitors
+	}
+	},
+    
+	// Window title in centre
+	"hyprland/window": {
+	"format": "{}",
+	"max-length": 60,
+	"separate-outputs": true,
+	"rewrite": {
+        	"(.*) — Mozilla Firefox": "🌍 $1",
+        	"(.*) - Visual Studio Code": "󰨞 $1",
+        	"(.*) - vim": " $1",
+        	"(.*) - nvim": " $1"
+	}
+	},
+    
+	// Idle inhibitor
+	"idle_inhibitor": {
+	"format": "{icon}",
+	"format-icons": {
+        	"activated": "󰒳",
+        	"deactivated": "󰒲"
+	},
+	"tooltip": true,
+	"tooltip-format-activated": "Idle inhibitor active",
+	"tooltip-format-deactivated": "Idle inhibitor inactive"
+	},
+    
+	// System tray
+	"tray": {
+	"icon-size": 18,
+	"spacing": 8,
+	"show-passive-items": true
+	},
+    
+	// Clock with British formatting
+	"clock": {
+	"timezone": "Europe/London",
+	"format": "{:%H:%M 󰃭}",
+	"format-alt": "{:%a, %d %b %Y 󰃭}",
+	"tooltip-format": "<tt><small>{calendar}</small></tt>",
+	"calendar": {
+        	"mode": "month",
+        	"mode-mon-col": 3,
+        	"weeks-pos": "right",
+        	"on-scroll": 1,
+        	"format": {
+        	"months": "<span color='#ffead3'><b>{}</b></span>",
+        	"days": "<span color='#ecc6d9'><b>{}</b></span>",
+        	"weeks": "<span color='#99ffdd'><b>W{}</b></span>",
+        	"weekdays": "<span color='#ffcc66'><b>{}</b></span>",
+        	"today": "<span color='#ff6699'><b><u>{}</u></b></span>"
+        	}
+	}
+	},
+    
+	// CPU monitoring
+	"cpu": {
+	"interval": 2,
+	"format": "{usage:2}% 󰘚",
+	"tooltip": true,
+	"tooltip-format": "CPU Usage: {usage}%\nLoad Average: {load}"
+	},
+    
+	// Memory monitoring  
+	"memory": {
+	"interval": 5,
+	"format": "{percentage:2}% 󰍛",
+	"tooltip": true,
+	"tooltip-format": "Memory: {used:0.1f}G/{total:0.1f}G ({percentage}%)\nSwap: {swapUsed:0.1f}G/{swapTotal:0.1f}G"
+	},
+    
+	// Temperature monitoring
+	"temperature": {
+	"thermal-zone": 2,
+	"hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
+	"critical-threshold": 85,
+	"format-critical": "{temperatureC}°C 󱃂",
+	"format": "{temperatureC}°C {icon}",
+	"format-icons": ["󱃃", "󰔏", "󱃂"],
+	"tooltip": true,
+	"tooltip-format": "Temperature: {temperatureC}°C"
+	},
+    
+	// Screen brightness
+	"backlight": {
+	"device": "intel_backlight",
+	"format": "{percent:2}% {icon}",
+	"format-icons": ["󰃞", "󰃟", ""],
+	"tooltip": true,
+	"tooltip-format": "Brightness: {percent}%",
+	"on-scroll-up": "brightnessctl set 5%+",
+	"on-scroll-down": "brightnessctl set 5%-"
+	},
+    
+	// Battery status
+	"battery": {
+	"interval": 30,
+	"states": {
+        	"good": 80,
+        	"warning": 30,
+        	"critical": 15
+	},
+	"format": "{capacity:2}% {icon}",
+	"format-charging": "{capacity:2}% 󰂄",
+	"format-plugged": "{capacity:2}% 󰚥",
+	"format-alt": "{time} {icon}",
+	"format-full": "Full 󰁹",
+	"format-icons": ["󰂎", "󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"],
+	"tooltip": true,
+	"tooltip-format": "{timeTo}\nPower: {power:0.1f}W"
+	},
+    
+	// Network configuration
+	"network": {
+	"interval": 5,
+	"format-wifi": "{essid} {signalStrength:2}% 󰤨",
+	//"format-ethernet": "{ipaddr}/{cidr} 󰈀", ENABLES IP ADDRESS FOR SOME FUCKED REASON 
+	"format-ethernet": "Connected 󰈀",
+	"format-linked": "{ifname} (No IP) 󰈀", 
+	"format-disconnected": "Disconnected 󰤭",
+	//"format-alt": "{ifname}: {ipaddr}/{cidr}", ENABLES IP ADDRESS FOR SOME FUCKED REASON AGAIN
+	"tooltip": true,
+	"tooltip-format": "{ifname} via {gwaddr}\nIP: {ipaddr}/{cidr}\nSignal: {signalStrength}%",
+	"tooltip-format-wifi": "SSID: {essid}\nSignal: {signalStrength}%\nFrequency: {frequency}MHz\nIP: {ipaddr}/{cidr}",
+	"tooltip-format-ethernet": "Interface: {ifname}\nIP: {ipaddr}/{cidr}\nGateway: {gwaddr}",
+	"on-click": "nm-connection-editor"
+	},
+    
+	// Audio controls
+	"pulseaudio": {
+	"format": "{volume:2}% {icon} {format_source}",
+	"format-bluetooth": "{volume:2}% {icon} {format_source}",
+	"format-bluetooth-muted": "󰂲 {icon} {format_source}",
+	"format-muted": "󰝟 {format_source}",
+	"format-source": "{volume:2}% 󰍬",
+	"format-source-muted": "󰍭",
+	"format-icons": {
+        	"headphone": "󰋋",
+        	"hands-free": "󱡏",
+        	"headset": "󰋎", 
+        	"phone": "󰏲",
+        	"portable": "󰦧",
+        	"car": "󰄋",
+        	"default": ["󰕿", "󰖀", "󰕾"]
+	},
+	"tooltip": true,
+	"tooltip-format": "Volume: {volume}%\nOutput: {desc}",
+	"on-click": "pavucontrol",
+	"on-click-right": "pactl set-sink-mute @DEFAULT_SINK@ toggle",
+	"on-scroll-up": "pactl set-sink-volume @DEFAULT_SINK@ +2%",
+	"on-scroll-down": "pactl set-sink-volume @DEFAULT_SINK@ -2%"
+	}
+}

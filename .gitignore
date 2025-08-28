@@ -1,0 +1,7 @@
+# Ignore swap files, temp files, caches
+*.swp
+*.swo
+*.tmp
+*.bak
+.cache/
+git_id

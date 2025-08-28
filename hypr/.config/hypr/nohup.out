@@ -1,0 +1,108 @@
+[ERR] Config has errors:
+Config error in file /home/rohaan/.config/hypr/hypridle.conf at line 5: config option <general:lockCmd> does not exist.
+Config error in file /home/rohaan/.config/hypr/hypridle.conf at line 6: config option <general:beforeSleepCmd> does not exist.
+Config error in file /home/rohaan/.config/hypr/hypridle.conf at line 7: config option <general:afterSleepCmd> does not exist.
+Config error in file /home/rohaan/.config/hypr/hypridle.conf at line 13: config option <listener:onTimeout> does not exist.
+Config error in file /home/rohaan/.config/hypr/hypridle.conf at line 14: config option <listener:onResume> does not exist.
+Config error in file /home/rohaan/.config/hypr/hypridle.conf at line 20: config option <listener:onTimeout> does not exist.
+Proceeding ignoring faulty entries
+[LOG] Registered timeout rule for 10s:
+      on-timeout: 
+      on-resume: 
+[LOG] Registered timeout rule for 30s:
+      on-timeout: 
+      on-resume: 
+[LOG]   | got iface: wl_seat v9
+[LOG]    > Bound to wl_seat v9
+[LOG]   | got iface: wl_data_device_manager v3
+[LOG]   | got iface: wl_compositor v6
+[LOG]   | got iface: wl_subcompositor v1
+[LOG]   | got iface: wl_shm v1
+[LOG]   | got iface: wp_viewporter v1
+[LOG]   | got iface: wp_tearing_control_manager_v1 v1
+[LOG]   | got iface: wp_fractional_scale_manager_v1 v1
+[LOG]   | got iface: zxdg_output_manager_v1 v3
+[LOG]   | got iface: wp_cursor_shape_manager_v1 v1
+[LOG]   | got iface: zwp_idle_inhibit_manager_v1 v1
+[LOG]   | got iface: zwp_relative_pointer_manager_v1 v1
+[LOG]   | got iface: zxdg_decoration_manager_v1 v1
+[LOG]   | got iface: wp_alpha_modifier_v1 v1
+[LOG]   | got iface: zwlr_gamma_control_manager_v1 v1
+[LOG]   | got iface: ext_foreign_toplevel_list_v1 v1
+[LOG]   | got iface: zwp_pointer_gestures_v1 v3
+[LOG]   | got iface: zwlr_foreign_toplevel_manager_v1 v3
+[LOG]   | got iface: zwp_keyboard_shortcuts_inhibit_manager_v1 v1
+[LOG]   | got iface: zwp_text_input_manager_v1 v1
+[LOG]   | got iface: zwp_text_input_manager_v3 v1
+[LOG]   | got iface: zwp_pointer_constraints_v1 v1
+[LOG]   | got iface: zwlr_output_power_manager_v1 v1
+[LOG]   | got iface: xdg_activation_v1 v1
+[LOG]   | got iface: ext_idle_notifier_v1 v2
+[LOG]    > Bound to ext_idle_notifier_v1 v2
+[LOG]   | got iface: hyprland_lock_notifier_v1 v1
+[LOG]    > Bound to hyprland_lock_notifier_v1 v1
+[LOG]   | got iface: ext_session_lock_manager_v1 v1
+[LOG]   | got iface: zwp_input_method_manager_v2 v1
+[LOG]   | got iface: zwp_virtual_keyboard_manager_v1 v1
+[LOG]   | got iface: zwlr_virtual_pointer_manager_v1 v2
+[LOG]   | got iface: zwlr_output_manager_v1 v4
+[LOG]   | got iface: org_kde_kwin_server_decoration_manager v1
+[LOG]   | got iface: hyprland_focus_grab_manager_v1 v1
+[LOG]   | got iface: zwp_tablet_manager_v2 v1
+[LOG]   | got iface: zwlr_layer_shell_v1 v5
+[LOG]   | got iface: wp_presentation v1
+[LOG]   | got iface: xdg_wm_base v6
+[LOG]   | got iface: zwlr_data_control_manager_v1 v2
+[LOG]   | got iface: zwp_primary_selection_device_manager_v1 v1
+[LOG]   | got iface: xwayland_shell_v1 v1
+[LOG]   | got iface: zwlr_screencopy_manager_v1 v3
+[LOG]   | got iface: hyprland_toplevel_export_manager_v1 v2
+[LOG]   | got iface: hyprland_toplevel_mapping_manager_v1 v1
+[LOG]   | got iface: hyprland_global_shortcuts_manager_v1 v1
+[LOG]   | got iface: xdg_wm_dialog_v1 v1
+[LOG]   | got iface: wp_single_pixel_buffer_manager_v1 v1
+[LOG]   | got iface: wp_security_context_manager_v1 v1
+[LOG]   | got iface: hyprland_ctm_control_manager_v1 v2
+[LOG]   | got iface: hyprland_surface_manager_v1 v2
+[LOG]   | got iface: wp_content_type_manager_v1 v1
+[LOG]   | got iface: xdg_toplevel_tag_manager_v1 v1
+[LOG]   | got iface: xdg_system_bell_v1 v1
+[LOG]   | got iface: wp_color_manager_v1 v1
+[LOG]   | got iface: wp_drm_lease_device_v1 v1
+[LOG]   | got iface: wp_linux_drm_syncobj_manager_v1 v1
+[LOG]   | got iface: wl_drm v2
+[LOG]   | got iface: zwp_linux_dmabuf_v1 v5
+[LOG]   | got iface: wl_output v4
+[LOG] found 2 rules
+[LOG] wayland done, registering dbus
+[LOG] Sleep inhibition enabled
+[LOG] Using dbus path /org/freedesktop/login1/session/_31
+[ERR] Couldn't connect to session dbus
+err: [org.freedesktop.DBus.Error.FileExists] Failed to request bus name (File exists)
+[LOG] Inhibited sleep with fd 10
+[LOG] Idled: rule 1eb79fe0
+[LOG] Ignoring, onTimeout is empty.
+[LOG] Idled: rule 1eb7a028
+[LOG] Ignoring, onTimeout is empty.
+[LOG] Resumed: rule 1eb79fe0
+[LOG] Ignoring, onRestore is empty.
+[LOG] Resumed: rule 1eb7a028
+[LOG] Ignoring, onRestore is empty.
+[LOG] Welcome to hyprpaper!
+built from commit v0.7.5 ()
+[LOG] Cleaned old hyprpaper preloads (4), removing 117.2MB
+[LOG] Preloaded target /home/rohaan/Pictures/Wallpapers/trento.jpg in 52.11ms -> Pixel size: [4096, 2304]
+[LOG] Buffer created for target /home/rohaan/Pictures/Wallpapers/trento.jpg, Shared Memory usage: 59.0MB
+[LOG] Total SM usage for all buffers: 59.0MB
+[LOG] configure for eDP-1
+[LOG] configure for eDP-1
+[LOG] Buffer created for target /home/rohaan/Pictures/Wallpapers/trento.jpg, Shared Memory usage: 5.8MB
+[LOG] Total SM usage for all buffers: 64.7MB
+[LOG] hyprpaper socket started at /run/user/1000/hypr/9958d297641b5c84dcff93f9039d80a5ad37ab00_1756219153_717067720/.hyprpaper.sock (fd: 4)
+[LOG] Image data for eDP-1: /home/rohaan/Pictures/Wallpapers/trento.jpg at [-0.00, 0.00], scale: 0.39 (original image size: [4096, 2304])
+[LOG] Submitting viewport dest size 1600x900 for 64d240
+[LOG] handlePreferredScale: 1.60 for 64d240
+[LOG] Buffer created for target /home/rohaan/Pictures/Wallpapers/trento.jpg, Shared Memory usage: 14.7MB
+[LOG] Total SM usage for all buffers: 79.5MB
+[LOG] Image data for eDP-1: /home/rohaan/Pictures/Wallpapers/trento.jpg at [-0.00, 0.00], scale: 0.62 (original image size: [4096, 2304])
+[LOG] Submitting viewport dest size 1600x900 for 64d240
