@@ -130,7 +130,7 @@
   users.users.rohaan = {
     isNormalUser = true;
     description = "Rohaan Khawaja";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "input" ];
     packages = with pkgs; [];
   };
 

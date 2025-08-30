@@ -18,6 +18,8 @@
     starship            # Custom Prompt 
     ripgrep             # Better grep
     bat                 # Better file preview 
+    lshw                # Shows Bus ID Values 
+    lsusb               # Shows USB Devices 
 
     # Silly terminal Tools 
     fortune             # Fortune cookies
@@ -33,7 +35,6 @@
     pavucontrol         # Volume Control 
     efibootmgr          # EFI Boot Manager 
     kanata              # Keyboard Remapping 
-    lshw                # Shows Bus ID Values 
 
     # Compilers
     gcc                 # C/C++ Compiler
@@ -62,7 +63,8 @@
     youtube-music                       # Youtube Music Client 
     libreoffice                         # Office Suite
     speedcrunch                         # Calculator
-    strawberry 
+    wootility                           # Keyboard Utility 
+    # KDE Applications 
     kdePackages.elisa                   # Music Player 
     kdePackages.kate                    # Text Editor
     kdePackages.dolphin                 # File Manager 

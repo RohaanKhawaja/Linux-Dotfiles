@@ -1,7 +1,7 @@
 # All of the hardware configuration for nixos on my laptop: OMEN 16-WF1006na 
 
 
-{ config, pkgs, ... }; 
+{ config, pkgs, ... }:
 
 { 
 
@@ -20,6 +20,30 @@
   hardware.graphics = { 
     enable = true; 
   }; 
+
+  # Enable wooting keyboard support 
+  hardware.wooting.enable = true; 
+
+  # Enable the service for the wooting driver 
+  services.udev.extraRules = ''
+    # Wooting One Legacy
+    SUBSYSTEM=="hidraw", ATTRS{idVendor}=="03eb", ATTRS{idProduct}=="ff01", TAG+="uaccess"
+    SUBSYSTEM=="usb", ATTRS{idVendor}=="03eb", ATTRS{idProduct}=="ff01", TAG+="uaccess"
+
+    # Wooting One update mode
+    SUBSYSTEM=="hidraw", ATTRS{idVendor}=="03eb", ATTRS{idProduct}=="2402", TAG+="uaccess"
+
+    # Wooting Two Legacy
+    SUBSYSTEM=="hidraw", ATTRS{idVendor}=="03eb", ATTRS{idProduct}=="ff02", TAG+="uaccess"
+    SUBSYSTEM=="usb", ATTRS{idVendor}=="03eb", ATTRS{idProduct}=="ff02", TAG+="uaccess"
+
+    # Wooting Two update mode
+    SUBSYSTEM=="hidraw", ATTRS{idVendor}=="03eb", ATTRS{idProduct}=="2403", TAG+="uaccess"
+
+    # Generic Wooting devices
+    SUBSYSTEM=="hidraw", ATTRS{idVendor}=="31e3", TAG+="uaccess"
+    SUBSYSTEM=="usb", ATTRS{idVendor}=="31e3", TAG+="uaccess"
+  '';
 
   # GPU Driver 
   #services.xserver.videoDrivers = ["nvidia"];
