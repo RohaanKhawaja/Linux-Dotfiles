@@ -9,7 +9,7 @@
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
       ./modules/programs.nix
-      #./modules/hardwareSetup.nix
+      ./modules/hardwareSetup.nix
     ];
 
   # Bootloader.
@@ -41,41 +41,6 @@
 	  alsa.enable = true; 
 	  pulse.enable = true; 
   }; 
-
-  # Enable Bluetooth 
-  hardware.bluetooth = { 
-    enable = true;
-    powerOnBoot = true; 
-    settings = { 
-      General = { 
-        Experimental = true; 
-      }; 
-    }; 
-  }; 
-
-  # Enable hardware acceleration
-  hardware.graphics = { 
-    enable = true; 
-  }; 
-
-  # GPU Driver 
-  #services.xserver.videoDrivers = ["nvidia"];
-#
-  ## Enable Nvidia GPU
-  #hardware.nvidia = {
-    #modesetting.enable = true; 
-    #powerManagement.enable = false;
-    #powerManagement.finegrained = false; 
-    #open = false; 
-    #nvidiaSettings = true;
-    #package = config.boot.kernelPackages.nvidiaPackages.latest;
-  #};
-#
-  ## Enable dual GPU's 
-  #hardware.nvidia.prime = { 
-    #intelBusId = "PCI:0:2:0";
-    #nvidiaBusId = "PCI:1:0:0";
-  #};
 
   networking.hostName = "nixos"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -146,7 +111,7 @@
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
-  
+
   # Enable experimental features 
   nix.settings.experimental-features =["nix-command" "flakes" ]; 
 

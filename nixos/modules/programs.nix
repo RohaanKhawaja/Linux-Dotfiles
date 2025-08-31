@@ -19,7 +19,8 @@
     ripgrep             # Better grep
     bat                 # Better file preview 
     lshw                # Shows Bus ID Values 
-    lsusb               # Shows USB Devices 
+    usbutils            # Shows USB Devices 
+    tdf                 # Terminal PDF Viewer
 
     # Silly terminal Tools 
     fortune             # Fortune cookies
@@ -27,6 +28,7 @@
     tt                  # Terminal Typing Test
     cmatrix             # Matrix Effect 
     cava                # Waveform  
+    asciiquarium        # Aquarium
     
     # System Utilities 
     ntfs3g              # NTFS Drive Utility 
