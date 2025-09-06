@@ -5,3 +5,4 @@
 *.bak
 .cache/
 git_id
+~/dotfiles/nixos/hardware-configuration.nix

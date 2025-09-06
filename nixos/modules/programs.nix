@@ -1,11 +1,10 @@
-# List of all programs for desktop use 
+# List of all programs 
 { config, pkgs, ... }:
 
 {
   environment.systemPackages = with pkgs; [
-    
+                                  
     # Terminal Tools 
-    neovim              # Text Editor 
     tmux                # Terminal Multiplexer 
     stow                # Dotfiles Management 
     git                 # Git 
@@ -29,6 +28,7 @@
     cmatrix             # Matrix Effect 
     cava                # Waveform  
     asciiquarium        # Aquarium
+    cbonsai             # Bonsai Tree
     
     # System Utilities 
     ntfs3g              # NTFS Drive Utility 
@@ -37,6 +37,8 @@
     pavucontrol         # Volume Control 
     efibootmgr          # EFI Boot Manager 
     kanata              # Keyboard Remapping 
+    libsForQt5.qt5ct    # QT5 Framework
+    kdePackages.qt6ct   # QT6 Configuration
 
     # Compilers
     gcc                 # C/C++ Compiler
@@ -56,7 +58,7 @@
     python3Packages.virtualenv          # Virtual environments
 
     # Optional MATLAB Alternative
-    octave              # GNU Octave (MATLAB-like)
+    octave              # GNU Octave (MATLAB-like - Scripts Only No simulink)
 
     # GUI/Desktop Apps 
     firefox                             # Main Web Browser 
@@ -66,6 +68,8 @@
     libreoffice                         # Office Suite
     speedcrunch                         # Calculator
     wootility                           # Keyboard Utility 
+    wasistlos                           # Whatsapp Client
+    bambu-studio                        # 3D Slicer
     # KDE Applications 
     kdePackages.elisa                   # Music Player 
     kdePackages.kate                    # Text Editor
@@ -87,10 +91,28 @@
     waybar                              # Status Bar 
     networkmanagerapplet                # Network Applet 
     swaynotificationcenter              # Notification Utility
-    cliphist                            # Clipboard Utility 
-    wl-clipboard                        # Clipboard Utility
+    wl-clipboard                        # Clipboard Backend
+    cliphist                            # Clipboard History 
 
+    # Neovim Plugins 
+    vimPlugins.telescope-nvim                # Fuzzy finder 
+    vimPlugins.nvim-treesitter               # Syntax Highlighting 
+    vimPlugins.nvim-lspconfig                # Setup Helpers for LSP Client
+    vimPlugins.dracula-nvim                  # Theme
   ];
+
+  # Neovim Configuration 
+  programs.neovim = {
+    enable = true;
+    defaultEditor = true;
+  };
+
+  # Steam Configuration
+  programs.steam = {
+    enable = true;
+    remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
+    dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
+  };
 
   # Fonts 
   fonts.packages = with pkgs; [ 
@@ -99,13 +121,6 @@
     nerd-fonts.jetbrains-mono 
     font-awesome
   ];
-
-  # Steam Configuration
-  programs.steam = {
-    enable = true;
-    remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
-    dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
-  };
 
 }
 

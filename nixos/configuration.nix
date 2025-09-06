@@ -11,8 +11,7 @@
       ./modules/programs.nix
       ./modules/hardwareSetup.nix
     ];
-
-  # Bootloader.
+# Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
@@ -56,7 +55,7 @@
   time.timeZone = "Europe/London";
   
   # Fix for dual boot time desyncs 
-  time.hardwareClockInLocalTime = false; 
+  time.hardwareClockInLocalTime = true; 
 
   # Select internationalisation properties.
   i18n.defaultLocale = "en_GB.UTF-8";

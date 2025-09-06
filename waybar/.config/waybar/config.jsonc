@@ -41,8 +41,9 @@
         	"active": "󰮯",
         	"default": "󰧞"
 	},
+  "ignore-workspaces": ["999", "1000", "1001"],
 	"persistent-workspaces": {
-        	"*": 5 // Show 5 workspaces on all monitors
+        	"*": 3 // Show 5 workspaces on all monitors
 	}
 	},
     
