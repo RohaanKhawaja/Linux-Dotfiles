@@ -1,10 +1,15 @@
 # List of all programs 
 { config, pkgs, ... }:
 
+let
+  neovim = import /etc/nixos/modules/nixCats.nix { inherit pkgs; };
+in
+
 {
   environment.systemPackages = with pkgs; [
                                   
     # Terminal Tools 
+    neovim
     tmux                # Terminal Multiplexer 
     stow                # Dotfiles Management 
     git                 # Git 
@@ -39,6 +44,7 @@
     kanata              # Keyboard Remapping 
     libsForQt5.qt5ct    # QT5 Framework
     kdePackages.qt6ct   # QT6 Configuration
+    openrazer-daemon    # Razer Hardware Daemon
 
     # Compilers
     gcc                 # C/C++ Compiler
@@ -68,6 +74,7 @@
     libreoffice                         # Office Suite
     speedcrunch                         # Calculator
     wootility                           # Keyboard Utility 
+    polychromatic                       # Frontend for peripheral control
     wasistlos                           # Whatsapp Client
     bambu-studio                        # 3D Slicer
     # KDE Applications 
@@ -94,18 +101,13 @@
     wl-clipboard                        # Clipboard Backend
     cliphist                            # Clipboard History 
 
-    # Neovim Plugins 
-    vimPlugins.telescope-nvim                # Fuzzy finder 
-    vimPlugins.nvim-treesitter               # Syntax Highlighting 
-    vimPlugins.nvim-lspconfig                # Setup Helpers for LSP Client
-    vimPlugins.dracula-nvim                  # Theme
   ];
 
-  # Neovim Configuration 
-  programs.neovim = {
-    enable = true;
-    defaultEditor = true;
-  };
+  ## Neovim Configuration 
+  #programs.neovim = {
+    #enable = true;
+    #defaultEditor = true;
+  #};
 
   # Steam Configuration
   programs.steam = {

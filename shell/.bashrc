@@ -15,6 +15,8 @@ alias f='z'
 alias fp='z ..' 
 alias fb=' z -' 
 alias fa='zi'
+alias copyPath='pwd | wl-copy' 
+alias searchHistory='bat ~/.bash_history | rg'
 
 # Aliases for mounting/unmounting drives 
 alias usbMount='sudo mount /dev/sda1 /mnt/usb && echo USB MOUNTED!' 
@@ -54,6 +56,7 @@ alias tmuxReload='tmux source-file ~/.tmux.conf && echo Tmux Config Sourced!'
 # Neovim Related Aliases
 alias vim='nvim' 
 alias nvimConfigEdit='sudo nvim ~/.config/nvim/init.lua' 
+alias nixCatsEdit='sudo nvim /etc/nixos/modules/nixCats.nix'
 alias nvimReload='sudo cp ~/.config/nvim/init.lua /root/.config/nvim/ && echo NeoVim Config Reloaded!' 
 
 # FZF Colour Scheme 

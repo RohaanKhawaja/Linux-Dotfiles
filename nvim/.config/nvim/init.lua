@@ -1,12 +1,10 @@
 -- Basic settings
---vim.cmd.colorscheme("dracula")                     -- Set theme to dracula 
 vim.opt.number = true                              -- Line numbers
 vim.opt.relativenumber = true                      -- Relative line numbers
 vim.opt.cursorline = true                          -- Highlight current line
 vim.opt.wrap = true                                -- Don't wrap lines
 vim.opt.scrolloff = 11                             -- Keep 10 lines above/below cursor 
 vim.opt.sidescrolloff = 9                          -- Keep 8 columns left/right of cursor
-
 -- Indentation
 vim.opt.tabstop = 3                                -- Tab width 
 vim.opt.shiftwidth = 2                             -- Indent width

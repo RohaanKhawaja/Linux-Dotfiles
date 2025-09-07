@@ -11,7 +11,8 @@
       ./modules/programs.nix
       ./modules/hardwareSetup.nix
     ];
-# Bootloader.
+
+  # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
@@ -94,7 +95,7 @@
   users.users.rohaan = {
     isNormalUser = true;
     description = "Rohaan Khawaja";
-    extraGroups = [ "networkmanager" "wheel" "input" ];
+    extraGroups = [ "networkmanager" "wheel" "input" "openrazer" ];
     packages = with pkgs; [];
   };
 
