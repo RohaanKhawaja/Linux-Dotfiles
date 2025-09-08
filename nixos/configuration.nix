@@ -25,6 +25,7 @@
   	xwayland.enable = true; 
   }; 
 
+  # Environment sessionVariables
   environment.sessionVariables = {
     # Set cursor theme
     HYPRCURSOR_THEME = "BreezeX-RosePine-Linux";
@@ -34,7 +35,7 @@
     # Configure Path for ripgrep config
     RIPGREP_CONFIG_PATH = "/home/rohaan/.ripgreprc"; 
   };
-
+  
   # Enable Audio 
   services.pipewire = { 
   	enable = true; 

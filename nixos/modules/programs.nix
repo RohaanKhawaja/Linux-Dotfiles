@@ -1,6 +1,7 @@
 # List of all programs 
 { config, pkgs, ... }:
 
+# Import nixCats.nix for declarative plugin management 
 let
   neovim = import /etc/nixos/modules/nixCats.nix { inherit pkgs; };
 in
@@ -9,7 +10,7 @@ in
   environment.systemPackages = with pkgs; [
                                   
     # Terminal Tools 
-    neovim
+    neovim              # Default Text Editor 
     tmux                # Terminal Multiplexer 
     stow                # Dotfiles Management 
     git                 # Git 
@@ -102,12 +103,6 @@ in
     cliphist                            # Clipboard History 
 
   ];
-
-  ## Neovim Configuration 
-  #programs.neovim = {
-    #enable = true;
-    #defaultEditor = true;
-  #};
 
   # Steam Configuration
   programs.steam = {

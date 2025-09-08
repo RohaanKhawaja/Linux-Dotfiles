@@ -1,10 +1,13 @@
--- Basic settings
-vim.opt.number = true                              -- Line numbers
-vim.opt.relativenumber = true                      -- Relative line numbers
+-- Basic Settings
 vim.opt.cursorline = true                          -- Highlight current line
-vim.opt.wrap = true                                -- Don't wrap lines
+vim.opt.number = true                              -- Line Numbers
+vim.opt.relativenumber = true                      -- Relative Line Numbers
+vim.opt.wrap = true                                -- Wrap lines
+vim.opt.linebreak = true                           -- Only wrap at word boundaries 
+vim.opt.showbreak = "↪ "                           -- Show symbol for line breaks 
 vim.opt.scrolloff = 11                             -- Keep 10 lines above/below cursor 
 vim.opt.sidescrolloff = 9                          -- Keep 8 columns left/right of cursor
+
 -- Indentation
 vim.opt.tabstop = 3                                -- Tab width 
 vim.opt.shiftwidth = 2                             -- Indent width
@@ -98,5 +101,72 @@ vim.g.clipboard = {
   cache_enabled = 2
 }
 
--- Plugins Configuration
+-- Plugins Configuration (deferred until after startup)
+vim.schedule(function()
+  -- Theme
+  vim.cmd.colorscheme("dracula")
 
+  -- Statusline
+  require("lualine").setup {
+    options = { theme = "dracula" }
+  }
+
+  -- Telescope fuzzy finder
+  require("telescope").setup {}
+
+  -- Git signs in gutter
+  require("gitsigns").setup()
+
+  -- Treesitter syntax highlighting
+  require("nvim-treesitter.configs").setup {
+    highlight = { enable = true },
+    indent = { enable = true }
+  }
+
+  -- Which-key (keybinding hints)
+  require("which-key").setup {}
+
+  -- LSP configs
+  require("lspconfig").clangd.setup {}
+  require("lspconfig").pyright.setup {}
+  require("lspconfig").jdtls.setup {}
+  require("lspconfig").texlab.setup {}
+
+  -- Autocompletion setup
+  local cmp = require("cmp")
+  local luasnip = require("luasnip")
+
+  cmp.setup {
+    snippet = {
+      expand = function(args) luasnip.lsp_expand(args.body) end,
+    },
+    mapping = cmp.mapping.preset.insert({
+      ["<C-Space>"] = cmp.mapping.complete(),
+      ["<CR>"] = cmp.mapping.confirm { select = true },
+      ["<Tab>"] = cmp.mapping(function(fallback)
+        if cmp.visible() then
+          cmp.select_next_item()
+        elseif luasnip.expand_or_jumpable() then
+          luasnip.expand_or_jump()
+        else
+          fallback()
+        end
+      end, { "i", "s" }),
+      ["<S-Tab>"] = cmp.mapping(function(fallback)
+        if cmp.visible() then
+          cmp.select_prev_item()
+        elseif luasnip.jumpable(-1) then
+          luasnip.jump(-1)
+        else
+          fallback()
+        end
+      end, { "i", "s" }),
+    }),
+    sources = cmp.config.sources({
+      { name = "nvim_lsp" },
+      { name = "luasnip" },
+      { name = "buffer" },
+      { name = "path" },
+    }),
+  }
+end)

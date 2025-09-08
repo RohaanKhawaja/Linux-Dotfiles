@@ -1,3 +1,5 @@
+# This is the file responsible for managing neovim packages 
+
 { # NOTE: you may call .overrideNixCats (or .override if you don't use callPackage on this)
   # to construct different packages from
   # your packageDefinitions from the resulting derivation of this expression!
@@ -25,14 +27,34 @@
     # this section is for dependencies that should be available
     # at RUN TIME for plugins. Will be available to PATH within neovim terminal
     # this includes LSPs
+    
     lspsAndRuntimeDeps = {
-      general = with pkgs; [ ];
+      general = with pkgs; [ 
+        clang-tools          # LSP + tools for C/C++ (clangd, clang-format, etc.)
+        pyright              # Python LSP (static type checker + IntelliSense-like features)
+        jdt-language-server  # Java LSP (syntax, navigation, refactor support)
+        texliveFull          # Full TeX/LaTeX distribution (needed by vimtex for compiling documents)
+      ];
     };
-
+    
     # This is for plugins that will load at startup without using packadd:
     startupPlugins = {
       general = with pkgs.vimPlugins; [ 
-        dracula-nvim
+        dracula-nvim       # Dracula theme (colourscheme)
+        nvim-treesitter    # Better syntax highlighting & parsing via Treesitter
+        nvim-lspconfig     # Simplifies setup of language servers (clangd, pyright, etc.)
+        nvim-cmp           # Completion engine (autocompletion menu)
+        cmp-nvim-lsp       # Completion source: integrates nvim-cmp with LSP servers
+        cmp-buffer         # Completion source: words from open buffers
+        cmp-path           # Completion source: file system paths
+        cmp_luasnip        # Completion source: snippets via LuaSnip
+        luasnip            # Snippet engine (expand snippets in completion and editing)
+        friendly-snippets  # Predefined snippet collection (for LuaSnip)
+        telescope-nvim     # Fuzzy finder (files, buffers, LSP symbols, git, etc.)
+        vimtex             # Full-featured LaTeX editing support (compilation, TOC, etc.)
+        gitsigns-nvim      # Git integration (show added/removed/modified lines in sign column)
+        lualine-nvim       # Statusline plugin (customisable status line)
+        which-key-nvim     # Displays available keybindings in a popup when you start a key sequence
       ];
     };
 

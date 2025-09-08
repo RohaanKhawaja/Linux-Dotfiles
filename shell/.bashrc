@@ -4,6 +4,11 @@ eval "$(starship init bash)"
 # Enable fzf 
 eval "$(fzf --bash)"
 
+# Set default editor to nvim 
+export EDITOR="nvim"
+export VISUAL="nvim"
+export GIT_EDITOR="nvim"
+
 # General Terminal aliases
 alias cls='clear' 
 alias aliasEdit='sudo nvim ~/.bashrc' 
