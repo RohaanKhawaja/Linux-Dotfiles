@@ -50,10 +50,10 @@ vim.opt.ttimeoutlen = 1                            -- Key code timeout
 vim.opt.autoread = true                            -- Auto reload files changed outside vim
 vim.opt.autowrite = false                          -- Don't auto save
 
--- Behavior settings
+-- Behaviour settings
 vim.opt.hidden = true                              -- Allow hidden buffers
 vim.opt.errorbells = false                         -- No error bells
-vim.opt.backspace = "indent,eol,start"             -- Better backspace behavior
+vim.opt.backspace = "indent,eol,start"             -- Better backspace behaviour
 vim.opt.autochdir = false                          -- Don't auto change directory
 --vim.opt.iskeyword:append("-")                      -- Treat dash as part of word
 vim.opt.path:append("**")                          -- include subdirectories in search
@@ -61,6 +61,21 @@ vim.opt.selection = "exclusive"                    -- Selection behavior
 vim.opt.mouse = "a"                                -- Enable mouse support
 vim.opt.modifiable = true                          -- Allow buffer modifications
 vim.opt.clipboard = "unnamedplus"
+
+-- Folding settings
+vim.o.foldmethod = "expr"
+vim.o.foldexpr = "v:lua.myFoldExpr(v:lnum)"
+
+function _G.myFoldExpr(lnum)
+  local line = vim.fn.getline(lnum)
+  if line:match("^%s*function") then
+    return ">"  -- start fold
+  elseif line:match("^%s*end") then
+    return "<"  -- end fold
+  else
+    return "="  -- same level
+  end
+end
 
 -- Cursor Settings (solid block = normal, solid line = visual, blinking line = insert) 
 vim.o.guicursor = table.concat({
