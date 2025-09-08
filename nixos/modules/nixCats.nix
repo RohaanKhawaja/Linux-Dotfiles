@@ -14,7 +14,7 @@
   # get the nixCats library with the builder function (and everything else) in it
   utils = import nixCats;
   # path to your new .config/nvim
-  luaPath = ~/.config/nvim;
+  luaPath = /home/rohaan/.config/nvim;
 
   # see :help nixCats.flake.outputs.categories
   categoryDefinitions = { pkgs, settings, categories, extra, name, mkPlugin, ... }@packageDef: {
@@ -77,7 +77,7 @@
     environmentVariables = {
       test = {
         CATTESTVAR = "It worked!";
-	XDG_CONFIG_HOME = "${luaPath}"; 
+	     XDG_CONFIG_HOME = "${luaPath}"; 
       };
     };
 
@@ -87,7 +87,7 @@
     extraWrapperArgs = {
       test = [
         '' --set CATTESTVAR2 "It worked again!"''
-	'' --set XDG_CONFIG_HOME "${luaPath}" ''
+	     '' --set XDG_CONFIG_HOME "${luaPath}" ''
       ];
     };
 

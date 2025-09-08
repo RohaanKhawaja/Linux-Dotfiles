@@ -189,4 +189,4 @@ vim.schedule(function()
     quiet = 1, 
     autoclose = 1, 
   } 
-end
+end)
