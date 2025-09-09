@@ -1,3 +1,4 @@
+-- This is a NixOS Specific init.lua! Please rebuild the system to reload the config
 -- Basic Settings
 vim.opt.cursorline = true                          -- Highlight current line
 vim.opt.number = true                              -- Line Numbers
@@ -61,21 +62,6 @@ vim.opt.selection = "exclusive"                    -- Selection behavior
 vim.opt.mouse = "a"                                -- Enable mouse support
 vim.opt.modifiable = true                          -- Allow buffer modifications
 vim.opt.clipboard = "unnamedplus"
-
--- Folding settings
-vim.o.foldmethod = "expr"
-vim.o.foldexpr = "v:lua.myFoldExpr(v:lnum)"
-
-function _G.myFoldExpr(lnum)
-  local line = vim.fn.getline(lnum)
-  if line:match("^%s*function") then
-    return ">"  -- start fold
-  elseif line:match("^%s*end") then
-    return "<"  -- end fold
-  else
-    return "="  -- same level
-  end
-end
 
 -- Cursor Settings (solid block = normal, solid line = visual, blinking line = insert) 
 vim.o.guicursor = table.concat({
@@ -185,7 +171,7 @@ vim.schedule(function()
     }),
   }
 
-  -- VimTeX configuration (deferred)
+  -- VimTeX configuration 
   vim.g.vimtex_view_method = 'tdf'           -- Use TDF inside Kitty
   vim.g.vimtex_quickfix_mode = 0             -- Only show quickfix on errors
   vim.g.vimtex_compiler_method = 'latexmk'   -- Default compiler
@@ -204,4 +190,10 @@ vim.schedule(function()
     quiet = 1, 
     autoclose = 1, 
   } 
+
+  -- Folding settings (deferred for treesitter)
+  vim.opt.foldmethod = "expr"                            -- Use expression for folding
+  vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"   -- Treesitter folding expression
+  vim.opt.foldlevel = 99                                 -- Keep all folds open by default
+  vim.opt.foldlevelstart = 99                            -- Same as above
 end)
