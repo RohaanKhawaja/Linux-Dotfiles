@@ -103,13 +103,6 @@
   # Enable automatic login for the user.
   services.getty.autologinUser = "rohaan";
    
-  # Mount the secondary drive automatically on startup 
-  fileSystems."/mnt/massStorage" = { 
-  	device = "/dev/disk/by-uuid/58A27D03A27CE6C2"; 
-	fsType = "ntfs-3g"; 
-	options = [ "rw" "uid=1000" "gid=100" "nofail"]; 
-  }; 
-
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 

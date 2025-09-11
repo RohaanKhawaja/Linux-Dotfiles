@@ -1,6 +1,4 @@
 # All of the hardware configuration for nixos on my laptop: OMEN 16-WF1006na 
-
-
 { config, pkgs, ... }:
 
 { 
@@ -42,4 +40,12 @@
     #intelBusId = "PCI:0:2:0";
     #nvidiaBusId = "PCI:1:0:0";
   #};
+
+  # Mount the secondary drive automatically on startup 
+  fileSystems."/mnt/massStorage" = { 
+  	device = "/dev/disk/by-uuid/58A27D03A27CE6C2"; 
+	fsType = "ntfs-3g"; 
+	options = [ "rw" "uid=1000" "gid=100" "nofail"]; 
+  }; 
+
 } 
