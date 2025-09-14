@@ -38,8 +38,9 @@
     XCURSOR_THEME = "BreezeX-RosePine-Linux";
     XCURSOR_SIZE = "24";
 
-    # Configure Path for ripgrep config
-    RIPGREP_CONFIG_PATH = "/home/rohaan/.ripgreprc"; 
+    RIPGREP_CONFIG_PATH = "/home/rohaan/.ripgreprc"; # Configure Path for ripgrep config
+    STEAM_RUNTIME = "1"; 
+
   };
   
   # Enable Audio 
