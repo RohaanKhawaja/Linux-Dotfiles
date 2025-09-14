@@ -37,15 +37,17 @@ in
     cbonsai             # Bonsai Tree
     
     # System Utilities 
-    ntfs3g              # NTFS Drive Utility 
-    brightnessctl       # Brightness Controls 
-    playerctl           # Multimedia Controls 
-    pavucontrol         # Volume Control 
-    efibootmgr          # EFI Boot Manager 
-    kanata              # Keyboard Remapping 
-    libsForQt5.qt5ct    # QT5 Framework
-    kdePackages.qt6ct   # QT6 Configuration
-    openrazer-daemon    # Razer Hardware Daemon
+    ntfs3g                             # NTFS Drive Utility 
+    brightnessctl                      # Brightness Controls 
+    playerctl                          # Multimedia Controls 
+    pavucontrol                        # Volume Control 
+    efibootmgr                         # EFI Boot Manager 
+    kanata                             # Keyboard Remapping 
+    libsForQt5.qt5ct                   # QT5 Framework
+    kdePackages.qt6ct                  # QT6 Configuration
+    libsForQt5.qt5.qtwayland           # QT5 Wayland 
+    kdePackages.qtwayland              # QT6 Wayland
+    openrazer-daemon                   # Razer Hardware Daemon
 
     # Compilers
     gcc                 # C/C++ Compiler

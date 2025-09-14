@@ -1,20 +1,25 @@
-# Edit this configuration file to define what should be installed on
-# your system.  Help is available in the configurationix(5) man page
-# and in the NixOS manual (accessible by running ‘nixos-help’).
+# Rohaan's NixOS configuration for use on a dual boot laptop but modular for any machine 
 
 { config, pkgs, ... }:
 
 {
   imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
+    [ 
+      ./hardware-configuration.nix     # Results of the hardware scan 
       ./modules/programs.nix
-      ./modules/hardwareSetup.nix
+      ./modules/hardwareSetup.nix      # Specific Settings for my laptop 
     ];
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
+
+  # Automate Garbage collection 
+  nix.gc = {
+    automatic = true;
+    dates = "weekly";
+    options = "--delete-older-than 7d";
+  };
 
   # Use latest kernel.
   boot.kernelPackages = pkgs.linuxPackages_latest;
@@ -32,6 +37,7 @@
     HYPRCURSOR_SIZE = "24";
     XCURSOR_THEME = "BreezeX-RosePine-Linux";
     XCURSOR_SIZE = "24";
+
     # Configure Path for ripgrep config
     RIPGREP_CONFIG_PATH = "/home/rohaan/.ripgreprc"; 
   };
