@@ -23,25 +23,28 @@
   hardware.wooting.enable = true; 
 
   # GPU Driver 
-  #services.xserver.videoDrivers = ["nvidia"];
-#
-  ## Enable Nvidia GPU
-  #hardware.nvidia = {
-    #modesetting.enable = true; 
-    #powerManagement.enable = false;
-    #powerManagement.finegrained = false; 
-    #open = false; 
-    #nvidiaSettings = true;
-    #package = config.boot.kernelPackages.nvidiaPackages.latest;
-  #};
-#
-  ## Enable dual GPU's 
-  #hardware.nvidia.prime = { 
-    #intelBusId = "PCI:0:2:0";
-    #nvidiaBusId = "PCI:1:0:0";
-  #};
+  services.xserver.videoDrivers = ["nvidia"];
 
-  # Mount the secondary drive automatically on startup 
+  # Enable Nvidia GPU
+  hardware.nvidia = {
+    modesetting.enable = true; 
+    powerManagement.enable = false;
+    powerManagement.finegrained = false; 
+    open = false; 
+    nvidiaSettings = true;
+    package = config.boot.kernelPackages.nvidiaPackages.stable;
+  };
+
+  # Prevent nouveau driver for Nvidia from loading 
+  boot.blacklistedKernelModules = [ "nouveau" ]; 
+
+  # Enable dual GPU's 
+  hardware.nvidia.prime = { 
+    intelBusId = "PCI:0:2:0";
+    nvidiaBusId = "PCI:1:0:0";
+  };
+
+  #Mount the secondary drive automatically on startup 
   fileSystems."/mnt/massStorage" = { 
   	device = "/dev/disk/by-uuid/58A27D03A27CE6C2"; 
 	fsType = "ntfs-3g"; 

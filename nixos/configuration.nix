@@ -21,8 +21,8 @@
     options = "--delete-older-than 7d";
   };
 
-  # Use latest kernel.
-  boot.kernelPackages = pkgs.linuxPackages_latest;
+  # Use latest kernel --> not actually because nvidia drivers don't work on that one 
+  boot.kernelPackages = pkgs.linuxPackages_6_14;
  
   # Enable Hyprland 
   programs.hyprland = { 
