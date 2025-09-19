@@ -1,5 +1,5 @@
 # All of the hardware configuration for nixos on my laptop: OMEN 16-WF1006na 
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 { 
 
@@ -40,9 +40,22 @@
 
   # Enable dual GPU's 
   hardware.nvidia.prime = { 
+    sync.enable = true; 
     intelBusId = "PCI:0:2:0";
     nvidiaBusId = "PCI:1:0:0";
   };
+
+  # Enable specialisations for swapping gpu at boot 
+  specialisation = { 
+    on-the-go.configuration = { 
+      system.nixos.tags = [ "on-the-go" ];
+      hardware.nvidia = { 
+        prime.offload.enable = lib.mkForce true; 
+        prime.offload.enableOffloadCmd = lib.mkForce true; 
+        prime.sync.enable = lib.mkForce false; 
+      }; 
+    }; 
+  }; 
 
   #Mount the secondary drive automatically on startup 
   fileSystems."/mnt/massStorage" = { 

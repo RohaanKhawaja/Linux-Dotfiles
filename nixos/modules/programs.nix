@@ -41,6 +41,7 @@ in
     brightnessctl                      # Brightness Controls 
     playerctl                          # Multimedia Controls 
     pavucontrol                        # Volume Control 
+    pulseaudioFull                     # Audio utils  
     efibootmgr                         # EFI Boot Manager 
     kanata                             # Keyboard Remapping 
     libsForQt5.qt5ct                   # QT5 Framework
@@ -48,6 +49,7 @@ in
     libsForQt5.qt5.qtwayland           # QT5 Wayland 
     kdePackages.qtwayland              # QT6 Wayland
     openrazer-daemon                   # Razer Hardware Daemon
+    libinput                           # Input Library 
 
     # Compilers
     gcc                 # C/C++ Compiler
