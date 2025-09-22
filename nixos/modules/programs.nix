@@ -50,6 +50,7 @@ in
     kdePackages.qtwayland              # QT6 Wayland
     openrazer-daemon                   # Razer Hardware Daemon
     libinput                           # Input Library 
+    virtualglLib                       # GPU Util 
 
     # Compilers
     gcc                 # C/C++ Compiler

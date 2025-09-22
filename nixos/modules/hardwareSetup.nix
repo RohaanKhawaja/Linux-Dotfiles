@@ -23,8 +23,8 @@
   hardware.wooting.enable = true; 
 
   # GPU Driver 
-  services.xserver.videoDrivers = ["nvidia"];
-
+  services.xserver.videoDrivers = [ "nvidia" ];
+  
   # Enable Nvidia GPU
   hardware.nvidia = {
     modesetting.enable = true; 
@@ -33,29 +33,31 @@
     open = false; 
     nvidiaSettings = true;
     package = config.boot.kernelPackages.nvidiaPackages.stable;
+  
+    # Default: Intel drives desktop, NVIDIA offload available
+    prime = {
+      offload.enable = true;           # iGPU default
+      offload.enableOffloadCmd = true; # installs prime-run wrapper
+      sync.enable = false;             # do not sync desktop to NVIDIA
+      intelBusId = "PCI:0:2:0";
+      nvidiaBusId = "PCI:1:0:0";
+    };
   };
-
+  
   # Prevent nouveau driver for Nvidia from loading 
   boot.blacklistedKernelModules = [ "nouveau" ]; 
-
-  # Enable dual GPU's 
-  hardware.nvidia.prime = { 
-    sync.enable = true; 
-    intelBusId = "PCI:0:2:0";
-    nvidiaBusId = "PCI:1:0:0";
-  };
-
-  # Enable specialisations for swapping gpu at boot 
+  
+  # Specialisation: full NVIDIA mode (internal display only, max performance)
   specialisation = { 
-    on-the-go.configuration = { 
-      system.nixos.tags = [ "on-the-go" ];
-      hardware.nvidia = { 
-        prime.offload.enable = lib.mkForce true; 
-        prime.offload.enableOffloadCmd = lib.mkForce true; 
-        prime.sync.enable = lib.mkForce false; 
-      }; 
-    }; 
-  }; 
+    nvidia-sync.configuration = {
+      system.nixos.tags = [ "nvidia-sync" ];
+      hardware.nvidia = {
+        prime.offload.enable = lib.mkForce false;
+        prime.offload.enableOffloadCmd = lib.mkForce false;
+        prime.sync.enable = lib.mkForce true;  # all rendering on NVIDIA
+      };
+    };
+  };
 
   #Mount the secondary drive automatically on startup 
   fileSystems."/mnt/massStorage" = { 
