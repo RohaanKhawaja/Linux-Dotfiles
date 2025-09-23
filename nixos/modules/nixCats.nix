@@ -55,6 +55,9 @@
         gitsigns-nvim      # Git integration (show added/removed/modified lines in sign column)
         lualine-nvim       # Statusline plugin (customisable status line)
         which-key-nvim     # Displays available keybindings in a popup when you start a key sequence
+        noice-nvim         # Floating, centred command line and enhanced message UI
+        nui-nvim           # Dependency providing floating window and UI abstractions
+        nvim-notify        # Optional, improves notifications and message popups
       ];
     };
 

@@ -1,4 +1,9 @@
 -- This is a NixOS Specific init.lua! Please rebuild the system to reload the config
+
+-- Ignore useless warnings 
+vim.opt.shortmess:append("I") -- hides some info messages
+vim._deprecated = false        -- hides internal deprecated warnings
+
 -- Basic Settings
 vim.opt.cursorline = true                          -- Highlight current line
 vim.opt.number = true                              -- Line Numbers
@@ -36,7 +41,7 @@ vim.opt.pumblend = 11                              -- Popup menu transparency
 vim.opt.winblend = 1                               -- Floating window transparency 
 vim.opt.conceallevel = 1                           -- Don't hide markup 
 vim.opt.concealcursor = ""                         -- Don't hide cursor line markup 
-vim.opt.lazyredraw = true                          -- Don't redraw during macros
+--vim.opt.lazyredraw = true                          -- Don't redraw during macros
 vim.opt.synmaxcol = 301                            -- Syntax highlighting limit 
 
 -- File handling
@@ -170,6 +175,42 @@ vim.schedule(function()
       { name = "path" },
     }),
   }
+
+  -- Notify Configuration
+  require("notify").setup({
+    background_colour = "#000000", -- prevents transparency issues
+  })
+  vim.notify = require("notify")
+
+  local notifyOk, notify = pcall(require, "notify")
+  if notifyOk then
+      notify.setup({
+          background_colour = "#000000", -- prevents transparency issues
+          stages = "fade",               -- smooth fade animation
+          timeout = 3000,                -- default timeout for messages
+      })
+      vim.notify = notify
+  end
+  
+  -- Noice Configuration
+  require("noice").setup({
+    cmdline = {
+      view = "cmdline_popup", -- centres the command line like wofi
+    },
+    messages = {
+      enabled = true, -- replaces default Neovim messages
+    },
+    popupmenu = {
+      enabled = true, -- better completion popup
+    },
+    presets = {
+      bottom_search = false,  -- use popup for search
+      command_palette = true, -- position cmdline + popupmenu together
+      long_message_to_split = true, -- long messages go into a split
+      inc_rename = true, -- enable :IncRename floating input
+      lsp_doc_border = true, -- adds borders to hover/signature help
+    },
+  })
 
   -- VimTeX configuration 
   vim.g.vimtex_view_method = 'tdf'           -- Use TDF inside Kitty

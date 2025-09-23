@@ -11,6 +11,7 @@ export GIT_EDITOR="nvim"
 
 # General Terminal aliases
 alias cls='clear' 
+alias home='clear && cd'
 alias aliasEdit='sudo nvim ~/.bashrc' 
 alias bashProfileEdit='sudo nvim ~/.bash_profile'
 alias aliasReload='source ~/.bashrc && echo Bashrc sourced!'
