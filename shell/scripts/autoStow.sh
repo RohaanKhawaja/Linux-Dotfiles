@@ -21,5 +21,15 @@ done
 # Stow everything else at once
 stow "${stowList[@]}"
 
+# --- Extra section: make layout scripts executable ---
+layoutDir="$(dirname "$0")/layouts"
+if [ -d "$layoutDir" ]; then
+    echo "Making layout scripts executable..."
+    chmod +x "$layoutDir"/*.sh
+fi
+
+# Remove the automatically generated configuration.nix 
+sudo rm /etc/nixos/configuration.nix 
+
 # Stow nixos specifically in its proper directory 
 sudo stow -t /etc/nixos nixos 

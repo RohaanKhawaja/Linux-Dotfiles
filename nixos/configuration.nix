@@ -1,18 +1,27 @@
 # Rohaan's NixOS configuration for use on a dual boot laptop but modular for any machine 
 
+# Main configuration file is responsible for importing modules and core system configuration
+
 { config, pkgs, ... }:
 
 {
   imports =
     [ 
       ./hardware-configuration.nix     # Results of the hardware scan 
-      ./modules/programs.nix
-      ./modules/hardwareSetup.nix      # Specific Settings for my laptop 
+      ./modules/hardwareSetup.nix      # Specific Settings for my laptop's hardware
+      ./modules/programs.nix           # List of Programs and some configuration
+      ./modules/desktop.nix            # Desktop Environment settings
     ];
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
+
+  # Use latest kernel --> not actually because nvidia drivers don't work on that one 
+  boot.kernelPackages = pkgs.linuxPackages_6_14;
+
+  # Define your hostname.
+  networking.hostName = "nixos"; 
 
   # Automate Garbage collection 
   nix.gc = {
@@ -21,55 +30,22 @@
     options = "--delete-older-than 7d";
   };
 
-  # Use latest kernel --> not actually because nvidia drivers don't work on that one 
-  boot.kernelPackages = pkgs.linuxPackages_6_14;
- 
-  # Enable Hyprland 
-  programs.hyprland = { 
-  	enable = true; 
-  	xwayland.enable = true; 
-  }; 
-
-  # Environment sessionVariables
-  environment.sessionVariables = {
-    # Set cursor theme
-    HYPRCURSOR_THEME = "BreezeX-RosePine-Linux";
-    HYPRCURSOR_SIZE = "24";
-    XCURSOR_THEME = "BreezeX-RosePine-Linux";
-    XCURSOR_SIZE = "24";
-
-    RIPGREP_CONFIG_PATH = "/home/rohaan/.ripgreprc"; # Configure Path for ripgrep config
-    STEAM_RUNTIME = "1"; 
-
-  };
-  
-  # Enable Audio 
-  services.pipewire = { 
-  	enable = true; 
-	  alsa.enable = true; 
-	  pulse.enable = true; 
-     jack.enable = true; 
-  }; 
-
-  networking.hostName = "nixos"; # Define your hostname.
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-   
-  # Configure network proxy if necessary
-  # networking.proxy.default = "http://user:password@proxy:port/";
-  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
-
   # Enable networking
   networking.networkmanager.enable = true;
 
-  # Set your time zone.
-  time.timeZone = "Europe/London";
-  
-  # Fix for dual boot time desyncs 
-  time.hardwareClockInLocalTime = true; 
+  # Enable Bluetooth 
+  hardware.bluetooth = { 
+    enable = true;
+    powerOnBoot = true; 
+    settings = { 
+      General = { 
+        Experimental = true; 
+      }; 
+    }; 
+  }; 
 
   # Select internationalisation properties.
   i18n.defaultLocale = "en_GB.UTF-8";
-
   i18n.extraLocaleSettings = {
     LC_ADDRESS = "en_GB.UTF-8";
     LC_IDENTIFICATION = "en_GB.UTF-8";

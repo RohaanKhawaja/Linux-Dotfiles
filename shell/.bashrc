@@ -32,10 +32,13 @@ alias windowsUnmount='sudo umount /mnt/windows && echo Windows Drive Unmounted!'
 
 # Git Related Aliases
 
-# Nix Related Aliases 
+# Nix Config Aliases
 alias nixConfigEdit='sudo nvim /etc/nixos/configuration.nix' 
 alias nixPrograms='sudo nvim /etc/nixos/modules/programs.nix' 
 alias nixHardware='sudo nvim /etc/nixos/modules/hardwareSetup.nix'
+alias nixDesktop='sudo nvim /etc/nixos/modules/desktop.nix'
+
+# Nix Commands 
 alias nixRebuild='sudo nixos-rebuild switch'
 alias nixSearch='nix search nixpkgs' 
 alias nixGenerationLs='sudo nix-env --list-generations --profile /nix/var/nix/profiles/system' 

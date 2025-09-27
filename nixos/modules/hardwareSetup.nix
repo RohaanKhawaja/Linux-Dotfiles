@@ -3,7 +3,7 @@
 
 { 
 
-# Enable Bluetooth 
+  # Enable Bluetooth 
   hardware.bluetooth = { 
     enable = true;
     powerOnBoot = true; 
@@ -19,6 +19,18 @@
     enable = true; 
   }; 
 
+  # Enable Kanata for more advanced keyboard remapping 
+  systemd.services.kanata = {
+    description = "Kanata keyboard remapper";
+    after = [ "graphical.target" ];
+    serviceConfig = {
+      ExecStart = "/run/current-system/sw/bin/kanata --cfg /home/rohaan/.config/kanata/kanata.kbd";
+      Type = "simple";
+      Restart = "no";
+    };
+    wantedBy = [ "graphical.target" ];
+  };
+  
   # Enable wooting keyboard support 
   hardware.wooting.enable = true; 
 
