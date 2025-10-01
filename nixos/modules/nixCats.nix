@@ -40,24 +40,25 @@
     # This is for plugins that will load at startup without using packadd:
     startupPlugins = {
       general = with pkgs.vimPlugins; [ 
-        dracula-nvim       # Dracula theme (colourscheme)
-        nvim-treesitter    # Better syntax highlighting & parsing via Treesitter
-        nvim-lspconfig     # Simplifies setup of language servers (clangd, pyright, etc.)
-        nvim-cmp           # Completion engine (autocompletion menu)
-        cmp-nvim-lsp       # Completion source: integrates nvim-cmp with LSP servers
-        cmp-buffer         # Completion source: words from open buffers
-        cmp-path           # Completion source: file system paths
-        cmp_luasnip        # Completion source: snippets via LuaSnip
-        luasnip            # Snippet engine (expand snippets in completion and editing)
-        friendly-snippets  # Predefined snippet collection (for LuaSnip)
-        telescope-nvim     # Fuzzy finder (files, buffers, LSP symbols, git, etc.)
-        vimtex             # Full-featured LaTeX editing support (compilation, TOC, etc.)
-        gitsigns-nvim      # Git integration (show added/removed/modified lines in sign column)
-        lualine-nvim       # Statusline plugin (customisable status line)
-        which-key-nvim     # Displays available keybindings in a popup when you start a key sequence
-        noice-nvim         # Floating, centred command line and enhanced message UI
-        nui-nvim           # Dependency providing floating window and UI abstractions
-        nvim-notify        # Optional, improves notifications and message popups
+        dracula-nvim          # Dracula theme (colourscheme)
+        nvim-treesitter       # Better syntax highlighting & parsing via Treesitter
+        nvim-lspconfig        # Simplifies setup of language servers (clangd, pyright, etc.)
+        nvim-cmp              # Completion engine (autocompletion menu)
+        cmp-nvim-lsp          # Completion source: integrates nvim-cmp with LSP servers
+        cmp-buffer            # Completion source: words from open buffers
+        cmp-path              # Completion source: file system paths
+        cmp_luasnip           # Completion source: snippets via LuaSnip
+        luasnip               # Snippet engine (expand snippets in completion and editing)
+        friendly-snippets     # Predefined snippet collection (for LuaSnip)
+        telescope-nvim        # Fuzzy finder (files, buffers, LSP symbols, git, etc.)
+        vimtex                # Full-featured LaTeX editing support (compilation, TOC, etc.)
+        gitsigns-nvim         # Git integration (show added/removed/modified lines in sign column)
+        lualine-nvim          # Statusline plugin (customisable status line)
+        which-key-nvim        # Displays available keybindings in a popup when you start a key sequence
+        noice-nvim            # Floating, centred command line and enhanced message UI
+        nui-nvim              # Dependency providing floating window and UI abstractions
+        nvim-notify           # Optional, improves notifications and message popups
+        indent-blankline-nvim # Shows a line for indentations
       ];
     };
 

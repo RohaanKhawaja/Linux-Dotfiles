@@ -2,6 +2,8 @@
 { config, pkgs, lib, ... }:
 
 { 
+  # Fix for dual boot time desyncs 
+  time.hardwareClockInLocalTime = true; 
 
   # Enable Bluetooth 
   hardware.bluetooth = { 
@@ -19,7 +21,10 @@
     enable = true; 
   }; 
 
-  # Enable Kanata for more advanced keyboard remapping 
+  # Enable wooting keyboard support 
+  hardware.wooting.enable = true; 
+
+  # Enable Kanata for more advanced keyboard remapping on built in keyboard
   systemd.services.kanata = {
     description = "Kanata keyboard remapper";
     after = [ "graphical.target" ];
@@ -31,8 +36,6 @@
     wantedBy = [ "graphical.target" ];
   };
   
-  # Enable wooting keyboard support 
-  hardware.wooting.enable = true; 
 
   # GPU Driver 
   services.xserver.videoDrivers = [ "nvidia" ];

@@ -37,6 +37,7 @@ alias nixConfigEdit='sudo nvim /etc/nixos/configuration.nix'
 alias nixPrograms='sudo nvim /etc/nixos/modules/programs.nix' 
 alias nixHardware='sudo nvim /etc/nixos/modules/hardwareSetup.nix'
 alias nixDesktop='sudo nvim /etc/nixos/modules/desktop.nix'
+alias nixUser='sudo nvim /etc/nixos/modules/user.nix'
 
 # Nix Commands 
 alias nixRebuild='sudo nixos-rebuild switch'

@@ -113,9 +113,27 @@ vim.schedule(function()
   vim.cmd.colorscheme("dracula")
 
   -- Statusline
-  require("lualine").setup {
-    options = { theme = "dracula" }
-  }
+  require("lualine").setup({
+    options = {
+      theme = "dracula", -- keep your Dracula theme
+    },
+    sections = {
+      lualine_x = {
+        {
+          require("noice").api.statusline.mode.get,
+          cond = require("noice").api.statusline.mode.has,
+          color = { fg = "#ff9e64" },
+        },
+      },
+    },
+  })
+  
+  
+  -- Indetation indicator 
+  require("ibl").setup  ({
+  indent = { char =  "│" },   -- pick your indent character
+  scope = { enabled = true }, -- highlight current scope
+  })
 
   -- Telescope fuzzy finder
   require("telescope").setup {}

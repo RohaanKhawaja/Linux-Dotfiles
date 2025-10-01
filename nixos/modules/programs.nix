@@ -1,4 +1,4 @@
-# List of all programs 
+# List of all programs for personal desktop use
 { config, pkgs, ... }:
 
 # Import nixCats.nix for declarative plugin management 
@@ -90,22 +90,6 @@ in
     kdePackages.kdeconnect-kde          # Phone sync Utility 
 
     # Gaming 
-
-    # Hyprland Ecosystem 
-    kitty                               # Terminal Emulator 
-    hyprshot                            # Screenshot Utility
-    hyprlock                            # Lockscreen Utility
-    hyprpaper                           # Wallpaper Utility 
-    hypridle                            # Idling Utility
-    hyprshade                           # Screen colour adjustment
-    hyprcursor                          # Cursor Utility
-    rose-pine-cursor                    # Cursor theme
-    wofi                                # App Launcher 
-    waybar                              # Status Bar 
-    networkmanagerapplet                # Network Applet 
-    swaynotificationcenter              # Notification Utility
-    wl-clipboard                        # Clipboard Backend
-    cliphist                            # Clipboard History 
 
   ];
 
