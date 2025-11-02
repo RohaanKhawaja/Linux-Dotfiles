@@ -93,9 +93,10 @@ Provides mod tap functionality and additional function layers
   XX  7    8    9    XX    XX    XX    XX    XX    XX    XX    XX    XX    bspc
   tab  4    5    6    XX    XX    XX    XX    XX    XX    XX    XX    XX    XX
   @escModTap 1    2    3    XX    XX    XX    XX    XX    XX    XX    XX    ret
-  lsft ret    .    0    XX    XX    XX    XX    XX    XX    XX    XX
+  lsft ret    .    0    bspc    XX    XX    XX    XX    XX    XX    XX
   lctl lmet lalt           @fn2            XX @capsLockModTap XX
   f13 calc prtsc
   ins  home pgup
   pause end  pgdn
 )
+
