@@ -18,14 +18,12 @@ in
     fzf                 # Fuzzy find 
     tree                # Tree Listing 
     btop                # System Resource Monitor
-    nvtopPackages.v3d   # GPU CLI Monitor 
     fastfetch           # System Specs 
     starship            # Custom Prompt 
     ripgrep             # Better grep
     bat                 # Better file preview 
-    lshw                # Shows Bus ID Values 
-    usbutils            # Shows USB Devices 
     tdf                 # Terminal PDF Viewer
+
 
     # Silly terminal Tools 
     fortune             # Fortune cookies
@@ -35,22 +33,6 @@ in
     cava                # Waveform  
     asciiquarium        # Aquarium
     cbonsai             # Bonsai Tree
-    
-    # System Utilities 
-    ntfs3g                             # NTFS Drive Utility 
-    brightnessctl                      # Brightness Controls 
-    playerctl                          # Multimedia Controls 
-    pavucontrol                        # Volume Control 
-    pulseaudioFull                     # Audio Utils  
-    efibootmgr                         # EFI Boot Manager 
-    kanata                             # Keyboard Remapping 
-    openrazer-daemon                   # Razer Hardware Daemon
-    libinput                           # Input Library 
-    virtualglLib                       # GPU Util 
-    libsForQt5.qt5ct                   # QT5 Framework
-    kdePackages.qt6ct                  # QT6 Configuration
-    libsForQt5.qt5.qtwayland           # QT5 Wayland 
-    kdePackages.qtwayland              # QT6 Wayland
 
     # Compilers
     gcc                 # C/C++ Compiler
@@ -72,41 +54,6 @@ in
     # Optional MATLAB Alternative
     octave              # GNU Octave (MATLAB-like - Scripts Only No simulink)
 
-    # GUI/Desktop Apps 
-    firefox                             # Main Web Browser 
-    brave                               # Chrome Web Browser 
-    vesktop                             # Discord 
-    youtube-music                       # Youtube Music Client 
-    libreoffice                         # Office Suite
-    speedcrunch                         # Calculator
-    wootility                           # Keyboard Utility 
-    polychromatic                       # Frontend for peripheral control
-    wasistlos                           # Whatsapp Client
-    bambu-studio                        # 3D Slicer
-    # KDE Applications 
-    kdePackages.elisa                   # Music Player 
-    kdePackages.kate                    # Text Editor
-    kdePackages.dolphin                 # File Manager 
-    kdePackages.kdeconnect-kde          # Phone sync Utility 
-
-    # Gaming 
-
   ];
-
-  # Steam Configuration
-  programs.steam = {
-    enable = true;
-    remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
-    dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
-  };
-
-  # Fonts 
-  fonts.packages = with pkgs; [ 
-    pkgs.nerd-fonts._0xproto 
-    pkgs.nerd-fonts.droid-sans-mono
-    nerd-fonts.jetbrains-mono 
-    font-awesome
-  ];
-
 }
 

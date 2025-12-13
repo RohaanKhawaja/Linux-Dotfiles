@@ -92,20 +92,20 @@ vim.keymap.set('n', '<Leader>D', 'D', { noremap = true })
 vim.keymap.set('x', '<Leader>d', 'd', { noremap = true })
 
 -- Use System Clipboard
-vim.env.XDG_RUNTIME_DIR = "/run/user/1000"
-vim.env.WAYLAND_DISPLAY = "wayland-1"
-vim.g.clipboard = {
-  name = "wl-clipboard",
-  copy = {
-    ["+"] = { "wl-copy", "--foreground", "--type", "text/plain" },
-    ["*"] = { "wl-copy", "--foreground", "--type", "text/plain" },
-  },
-  paste = {
-    ["+"] = { "wl-paste", "--no-newline" },
-    ["*"] = { "wl-paste", "--no-newline" },
-  },
-  cache_enabled = 2
-}
+--vim.opt.clipboard = "unnamedplus"
+
+--vim.g.clipboard = {
+  --name = "osc52",
+  --copy = {
+    --["+"] = "OSC52Copy",
+    --["*"] = "OSC52Copy",
+  --},
+  --paste = {
+    --["+"] = "OSC52Paste",
+    --["*"] = "OSC52Paste",
+  --},
+  --cache_enabled = 0,
+--}
 
 -- Plugins Configuration (deferred until after startup)
 vim.schedule(function()

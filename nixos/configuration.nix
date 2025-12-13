@@ -1,67 +1,38 @@
-# Rohaan's NixOS configuration for use on a dual boot laptop but modular for any machine 
+# Edit this configuration file to define what should be installed on
+# your system. Help is available in the configuration.nix(5) man page, on
+# https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 
-# Main configuration file is responsible for importing modules and core system configuration
+# NixOS-WSL specific options are documented on the NixOS-WSL repository:
+# https://github.com/nix-community/NixOS-WSL
 
-{ config, pkgs, ... }:
+{ config, lib, pkgs, ... }:
 
 {
+  imports = [
+    # include NixOS-WSL modules
+    <nixos-wsl/modules>
+    ./modules/programs.nix
+  ];
 
-  imports =
-    [ 
-      ./hardware-configuration.nix     # Results of the hardware scan 
-      ./modules/hardwareSetup.nix      # Specific Settings for my laptop's hardware
-      ./modules/programs.nix           # List of Programs and some configuration
-      ./modules/desktop.nix            # Desktop Environment settings
-      ./modules/user.nix               # User account configurations 
-    ];
+  wsl.enable = true;
+  wsl.defaultUser = "nixos";
 
-  # System Version  
-  system.stateVersion = "25.05"; 
+  # This value determines the NixOS release from which the default
+  # settings for stateful data, like file locations and database versions
+  # on your system were taken. It's perfectly fine and recommended to leave
+  # this value at the release version of the first install of this system.
+  # Before changing this value read the documentation for this option
+  # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
+  system.stateVersion = "25.05"; # Did you read the comment?
 
-  # Bootloader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
-
-  # User kernel 6.14 for compatibility with nvidia drivers 
-  boot.kernelPackages = pkgs.linuxPackages_6_14;
-
-  # Define your hostname.
-  networking.hostName = "nixos"; 
-
-  # Enable networking
-  networking.networkmanager.enable = true;
-
-  # Automate Garbage collection 
-  nix.gc = {
-    automatic = true;
-    dates = "weekly";
-    options = "--delete-older-than 7d";
-  };
-
-  # Select internationalisation properties.
-  i18n.defaultLocale = "en_GB.UTF-8";
-  i18n.extraLocaleSettings = {
-    LC_ADDRESS = "en_GB.UTF-8";
-    LC_IDENTIFICATION = "en_GB.UTF-8";
-    LC_MEASUREMENT = "en_GB.UTF-8";
-    LC_MONETARY = "en_GB.UTF-8";
-    LC_NAME = "en_GB.UTF-8";
-    LC_NUMERIC = "en_GB.UTF-8";
-    LC_PAPER = "en_GB.UTF-8";
-    LC_TELEPHONE = "en_GB.UTF-8";
-    LC_TIME = "en_GB.UTF-8";
-  };
-
-  # Configure keymap in X11
-  services.xserver.xkb = {
-    layout = "us";
-    variant = "";
-  };
-
-  # Allow unfree packages
-  nixpkgs.config.allowUnfree = true;
+  # Allow unfree packages 
+  nixpkgs.config.allowUnfree = true; 
 
   # Enable experimental features 
-  nix.settings.experimental-features =["nix-command" "flakes" ]; 
+  nix.settings.experimental-features =["nix-command" "flakes" ];
 
+  # Enable hardware acceleration 
+  hardware.graphics = {
+    enable = true;
+  }; 
 }
