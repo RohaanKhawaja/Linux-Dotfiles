@@ -14,6 +14,7 @@ in
     tmux                # Terminal Multiplexer 
     stow                # Dotfiles Management 
     git                 # Git 
+    gh                  # GitHub CLI
     zoxide              # Better CD 
     fzf                 # Fuzzy find 
     tree                # Tree Listing 
@@ -23,7 +24,6 @@ in
     ripgrep             # Better grep
     bat                 # Better file preview 
     tdf                 # Terminal PDF Viewer
-
 
     # Silly terminal Tools 
     fortune             # Fortune cookies

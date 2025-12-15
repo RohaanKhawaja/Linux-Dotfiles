@@ -14,8 +14,13 @@
     ./modules/programs.nix
   ];
 
+  # Core WSL settings 
   wsl.enable = true;
   wsl.defaultUser = "nixos";
+
+  # Enable OpenGL driver from Windows Host 
+  wsl.useWindowsDriver = true; 
+  
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
