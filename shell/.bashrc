@@ -48,6 +48,9 @@ alias nvimConfigEdit='sudo nvim ~/.config/nvim/init.lua'
 alias nixCatsEdit='sudo nvim /etc/nixos/modules/nixCats.nix'
 alias nvimReload='sudo cp ~/.config/nvim/init.lua /root/.config/nvim/ && echo NeoVim Config Reloaded!' 
 
+# Alacritty WSL related aliases
+alias alacrittyConfigEdit='sudo nvim /mnt/c/Users/Rohaan/AppData/Roaming/alacritty/alacritty.toml'
+
 # FZF Colour Scheme 
 export FZF_DEFAULT_OPTS='--color=fg:#f8f8f2,bg:#282a36,hl:#bd93f9 --color=fg+:#f8f8f2,bg+:#44475a,hl+:#bd93f9 --color=info:#ffb86c,prompt:#50fa7b,pointer:#ff79c6 --color=marker:#ff79c6,spinner:#ffb86c,header:#6272a4'
 

@@ -66,7 +66,7 @@ vim.opt.path:append("**")                          -- include subdirectories in 
 vim.opt.selection = "exclusive"                    -- Selection behavior
 vim.opt.mouse = "a"                                -- Enable mouse support
 vim.opt.modifiable = true                          -- Allow buffer modifications
-vim.opt.clipboard = "unnamedplus"
+vim.opt.clipboard = "unnamedplus"                  -- Use System clipboard
 
 -- Cursor Settings (solid block = normal, solid line = visual, blinking line = insert) 
 vim.o.guicursor = table.concat({
@@ -91,21 +91,6 @@ vim.keymap.set('n', '<Leader>d', 'd', { noremap = true })
 vim.keymap.set('n', '<Leader>D', 'D', { noremap = true })
 vim.keymap.set('x', '<Leader>d', 'd', { noremap = true })
 
--- Use System Clipboard
---vim.opt.clipboard = "unnamedplus"
-
---vim.g.clipboard = {
-  --name = "osc52",
-  --copy = {
-    --["+"] = "OSC52Copy",
-    --["*"] = "OSC52Copy",
-  --},
-  --paste = {
-    --["+"] = "OSC52Paste",
-    --["*"] = "OSC52Paste",
-  --},
-  --cache_enabled = 0,
---}
 
 -- Plugins Configuration (deferred until after startup)
 vim.schedule(function()
