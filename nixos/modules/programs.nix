@@ -23,7 +23,6 @@ in
     starship            # Custom Prompt 
     ripgrep             # Better grep
     bat                 # Better file preview 
-    tdf                 # Terminal PDF Viewer
 
     # Silly terminal Tools 
     fortune             # Fortune cookies
@@ -34,6 +33,7 @@ in
     asciiquarium        # Aquarium
     cbonsai             # Bonsai Tree
 
+    # PDF Viewer 
     # Compilers
     gcc                 # C/C++ Compiler
     llvmPackages.clang  # C/C++ Compiler (Clang/LLVM alternative)
@@ -53,6 +53,9 @@ in
 
     # Optional MATLAB Alternative
     octave              # GNU Octave (MATLAB-like - Scripts Only No simulink)
+    
+    # Hardware
+    arduino-cli
 
   ];
 }
