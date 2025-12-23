@@ -21,7 +21,7 @@ alias f='z'
 alias fp='z ..' 
 alias fb=' z -' 
 alias fa='zi'
-alias copyPath='pwd | clip.exe' 
+alias copyPath='pwd | clip.exe'                 # Clip.exe specifically for WSL 
 alias searchHistory='bat ~/.bash_history | rg'
 
 # Git Related Aliases
