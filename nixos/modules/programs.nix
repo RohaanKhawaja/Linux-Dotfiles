@@ -33,7 +33,6 @@ in
     asciiquarium        # Aquarium
     cbonsai             # Bonsai Tree
 
-    # PDF Viewer 
     # Compilers
     gcc                 # C/C++ Compiler
     llvmPackages.clang  # C/C++ Compiler (Clang/LLVM alternative)
@@ -47,9 +46,17 @@ in
     meson               # Build system
     ninja               # Build system backend
 
-    # Python Extras
-    python3Packages.pip                 # Python package manager
-    python3Packages.virtualenv          # Virtual environments
+
+    # Python Libraries
+    python3Packages.pip
+    python3Packages.virtualenv
+    python3Packages.manim
+    python3Packages.numpy
+    python3Packages.matplotlib
+    python3Packages.scipy
+    python3Packages.sympy
+    python3Packages.pandas
+    python3Packages.pillow
 
     # Optional MATLAB Alternative
     octave              # GNU Octave (MATLAB-like - Scripts Only No simulink)

@@ -237,7 +237,9 @@ vim.schedule(function()
 
   -- Folding settings (deferred for treesitter)
   vim.opt.foldmethod = "expr"                            -- Use expression for folding
-  vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"   -- Treesitter folding expression
+  --vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"   -- Treesitter folding expression
+  vim.opt.foldexpr = "nvim_treesitter#foldexpr()"        -- Treesitter folding expression
   vim.opt.foldlevel = 99                                 -- Keep all folds open by default
   vim.opt.foldlevelstart = 99                            -- Same as above
+  vim.opt.foldenable = true
 end)
