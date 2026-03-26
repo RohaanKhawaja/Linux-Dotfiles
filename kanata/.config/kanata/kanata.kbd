@@ -1,4 +1,4 @@
-#| Rohaan's Kanata Config 
+#  Rohaan's Kanata Config 
 This config only targets the built-in keyboard on my laptop 
 Provides mod tap functionality and additional function layers 
 |# 
@@ -79,7 +79,7 @@ Provides mod tap functionality and additional function layers
   XX  XX   f2   f3   XX   XX   XX   XX   XX   XX   XX  XX  XX  XX
   grv  1    prev    pp    next    XX    XX    XX    XX    XX    XX    XX    XX    bspc
   tab  home    up    end    pgup    XX    XX    XX    XX    XX    XX    XX    XX    XX
-  @escModTap left    down    right    pgdn    lsft    h    prev    pp    next    ;    '    ret
+  @escModTap left    down    right    pgdn    lsft    XX    XX    XX    prev    pp    next    ret
   lsft mute    vold    volu    XX    lctl    XX    mute    vold    volu    /    rsft
   lctl lmet lalt           @fn2            XX @capsLockModTap rctl
   f13 calc prtsc
