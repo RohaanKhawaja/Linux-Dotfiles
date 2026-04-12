@@ -8,7 +8,7 @@
 
   imports =
     [ 
-      ./hardware-configuration.nix     # Results of the hardware scan 
+      /etc/nixos/hardware-configuration.nix     # Results of the hardware scan 
       ./modules/hardwareSetup.nix      # Specific Settings for my laptop's hardware
       ./modules/programs.nix           # List of Programs and some configuration
       ./modules/desktop.nix            # Desktop Environment settings
@@ -23,7 +23,7 @@
   boot.loader.efi.canTouchEfiVariables = true;
 
   # User kernel 6.14 for compatibility with nvidia drivers 
-  boot.kernelPackages = pkgs.linuxPackages_6_14;
+  boot.kernelPackages = pkgs.linuxPackages_latest;
 
   # Define your hostname.
   networking.hostName = "nixos"; 

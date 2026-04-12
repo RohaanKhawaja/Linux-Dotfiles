@@ -14,6 +14,7 @@ in
     tmux                # Terminal Multiplexer 
     stow                # Dotfiles Management 
     git                 # Git 
+    gh                  # GitHub 
     zoxide              # Better CD 
     fzf                 # Fuzzy find 
     tree                # Tree Listing 

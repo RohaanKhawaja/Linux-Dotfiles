@@ -38,41 +38,41 @@
   
 
   # GPU Driver 
-  services.xserver.videoDrivers = [ "nvidia" ];
+  #services.xserver.videoDrivers = [ "nvidia" ];
   
   # Enable Nvidia GPU
-  hardware.nvidia = {
-    modesetting.enable = true; 
-    powerManagement.enable = false;
-    powerManagement.finegrained = false; 
-    open = false; 
-    nvidiaSettings = true;
-    package = config.boot.kernelPackages.nvidiaPackages.stable;
-  
-    # Default: Intel drives desktop, NVIDIA offload available
-    prime = {
-      offload.enable = true;           # iGPU default
-      offload.enableOffloadCmd = true; # installs prime-run wrapper
-      sync.enable = false;             # do not sync desktop to NVIDIA
-      intelBusId = "PCI:0:2:0";
-      nvidiaBusId = "PCI:1:0:0";
-    };
-  };
+  #hardware.nvidia = {
+    #modesetting.enable = true; 
+    #powerManagement.enable = false;
+    #powerManagement.finegrained = false; 
+    #open = false; 
+    #nvidiaSettings = true;
+    #package = config.boot.kernelPackages.nvidiaPackages.stable;
+  #
+    ## Default: Intel drives desktop, NVIDIA offload available
+    #prime = {
+      #offload.enable = true;           # iGPU default
+      #offload.enableOffloadCmd = true; # installs prime-run wrapper
+      #sync.enable = false;             # do not sync desktop to NVIDIA
+      #intelBusId = "PCI:0:2:0";
+      #nvidiaBusId = "PCI:1:0:0";
+    #};
+  #};
   
   # Prevent nouveau driver for Nvidia from loading 
-  boot.blacklistedKernelModules = [ "nouveau" ]; 
+  #boot.blacklistedKernelModules = [ "nouveau" ]; 
   
   # Specialisation: full NVIDIA mode (internal display only, max performance)
-  specialisation = { 
-    nvidia-sync.configuration = {
-      system.nixos.tags = [ "nvidia-sync" ];
-      hardware.nvidia = {
-        prime.offload.enable = lib.mkForce false;
-        prime.offload.enableOffloadCmd = lib.mkForce false;
-        prime.sync.enable = lib.mkForce true;  # all rendering on NVIDIA
-      };
-    };
-  };
+  #specialisation = { 
+    #nvidia-sync.configuration = {
+      #system.nixos.tags = [ "nvidia-sync" ];
+      #hardware.nvidia = {
+        #prime.offload.enable = lib.mkForce false;
+        #prime.offload.enableOffloadCmd = lib.mkForce false;
+        #prime.sync.enable = lib.mkForce true;  # all rendering on NVIDIA
+      #};
+    #};
+  #};
 
   #Mount the secondary drive automatically on startup 
   fileSystems."/mnt/massStorage" = { 
