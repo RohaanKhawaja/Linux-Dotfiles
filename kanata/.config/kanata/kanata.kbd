@@ -1,4 +1,4 @@
-#  Rohaan's Kanata Config 
+#|  Rohaan's Kanata Config 
 This config only targets the built-in keyboard on my laptop 
 Provides mod tap functionality and additional function layers 
 |# 
@@ -8,7 +8,7 @@ Provides mod tap functionality and additional function layers
    Interception driver on Windows causes issues with game anti-cheats and is commented out as a result. 
 |# 
 (defcfg
-  linux-dev-names-include(
+  linux-dev-names-include (
     "PRiMAX HP FY23 OMEN 16 KBM Keyboard" 
     "PRiMAX HP FY23 OMEN 16 KBM Keypad" 
     "PRiMAX HP FY23 OMEN 16 KBM Consumer" 
