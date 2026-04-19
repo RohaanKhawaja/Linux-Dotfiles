@@ -66,7 +66,7 @@ vim.opt.path:append("**")                          -- include subdirectories in 
 vim.opt.selection = "exclusive"                    -- Selection behavior
 vim.opt.mouse = "a"                                -- Enable mouse support
 vim.opt.modifiable = true                          -- Allow buffer modifications
-vim.opt.clipboard = "unnamedplus"
+vim.opt.clipboard = "unnamedplus"                  -- Use System clipboard
 
 -- Cursor Settings (solid block = normal, solid line = visual, blinking line = insert) 
 vim.o.guicursor = table.concat({
@@ -85,27 +85,62 @@ vim.g.mapleader = ' '
 vim.keymap.set('n', 'd', '"_d', { noremap = true })
 vim.keymap.set('n', 'D', '"_D', { noremap = true })
 vim.keymap.set('x', 'd', '"_d', { noremap = true })
+-- Change without yanking by default
+vim.keymap.set('n', 'c', '"_c', { noremap = true })
+vim.keymap.set('n', 'C', '"_C', { noremap = true })
+vim.keymap.set('x', 'c', '"_c', { noremap = true })
 
 -- Leader + delete = normal delete (yanks)
 vim.keymap.set('n', '<Leader>d', 'd', { noremap = true })
 vim.keymap.set('n', '<Leader>D', 'D', { noremap = true })
 vim.keymap.set('x', '<Leader>d', 'd', { noremap = true })
+-- Leader + change = normal change (yanks)
+vim.keymap.set('n', '<Leader>c', 'c', { noremap = true })
+vim.keymap.set('n', '<Leader>C', 'C', { noremap = true })
+vim.keymap.set('x', '<Leader>c', 'c', { noremap = true })
 
--- Use System Clipboard
-vim.env.XDG_RUNTIME_DIR = "/run/user/1000"
-vim.env.WAYLAND_DISPLAY = "wayland-1"
-vim.g.clipboard = {
-  name = "wl-clipboard",
-  copy = {
-    ["+"] = { "wl-copy", "--foreground", "--type", "text/plain" },
-    ["*"] = { "wl-copy", "--foreground", "--type", "text/plain" },
-  },
-  paste = {
-    ["+"] = { "wl-paste", "--no-newline" },
-    ["*"] = { "wl-paste", "--no-newline" },
-  },
-  cache_enabled = 2
-}
+
+-- Open SumatraPDF (WSL command)
+vim.api.nvim_create_user_command("OpenPdf", function()
+    -- Get current file (e.g. test.tex)
+    local texFile = vim.fn.expand("%:p")
+
+    -- Replace extension with .pdf
+    local pdfFile = texFile:gsub("%.tex$", ".pdf")
+
+    -- Check if PDF exists
+    if vim.fn.filereadable(pdfFile) == 0 then
+        print("PDF not found: " .. pdfFile)
+        return
+    end
+
+    -- Convert to Windows path
+    local winPath = vim.fn.system("wslpath -w " .. pdfFile):gsub("\n", "")
+
+    -- Path to SumatraPDF
+    local sumatra = "/mnt/c/Users/Rohaan/AppData/Local/SumatraPDF/SumatraPDF.exe"
+
+    -- Open PDF
+    vim.fn.jobstart({sumatra, "-reuse-instance", winPath}, {detach = true})
+end, {})
+
+-- Enable spell checking automatically for certain filetypes
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = { "tex", "markdown", "text" },  -- add more if needed
+  callback = function()
+    -- Set British English for the current buffer
+    vim.opt_local.spelllang = "en_gb"
+
+    -- Enable spell checking
+    vim.opt_local.spell = true
+
+    -- Optional: highlight current line + nicer undercurl
+    vim.cmd("highlight SpellBad gui=undercurl guisp=Red")
+    vim.cmd("highlight SpellCap gui=undercurl guisp=Orange")
+    vim.cmd("highlight SpellRare gui=undercurl guisp=Blue")
+    vim.cmd("highlight SpellLocal gui=undercurl guisp=Green")
+  end,
+})
 
 -- Plugins Configuration (deferred until after startup)
 vim.schedule(function()
@@ -156,48 +191,182 @@ vim.schedule(function()
   require("lspconfig").jdtls.setup {}
   require("lspconfig").texlab.setup {}
 
-  -- Autocompletion setup
+  local ls = require("luasnip")
+  
+  -- Optional: load vscode-style snippets (like friendly-snippets)
+  require("luasnip.loaders.from_vscode").lazy_load()
+  
+  -- Define snippets manually
+  ls.snippets = ls.snippets or {}  -- ensure the table exists
+  ls.snippets.tex = ls.snippets.tex or {}
+  
+  ls.snippets.tex = vim.list_extend(ls.snippets.tex, {
+      -- Environment
+      ls.snippet("beg", {
+          ls.text_node({"\\begin{"}),
+          ls.insert_node(1, "environment"),
+          ls.text_node({"}"}),
+          ls.insert_node(0),
+          ls.text_node({"\\end{"}),
+          ls.insert_node(1),
+          ls.text_node({"}"})
+      }),
+      -- Unlabelled equation 
+      ls.snippet("eq", {
+        ls.text_node({"\\begin{equation*}", "\t"}),
+        ls.insert_node(1),
+        ls.text_node({"", "\\end{equation*}"}),
+      }),
+      -- Labelled equation
+      ls.snippet("eqn", {
+        ls.text_node({"\\begin{equation}", "\t"}),
+        ls.insert_node(1),
+        ls.text_node({"", "\t\\label{"}),
+        ls.insert_node(2, "eq:"),
+        ls.text_node({"}", "\\end{equation}"}),
+      }),
+      -- Fraction
+      ls.snippet("fr", {
+          ls.text_node({"\\frac{"}),
+          ls.insert_node(1),
+          ls.text_node({"}{"}),
+          ls.insert_node(2),
+          ls.text_node({"}"})
+      }),
+      -- Subscript
+      ls.snippet("sub", {
+          ls.insert_node(1),
+          ls.text_node({"_{"}),
+          ls.insert_node(2),
+          ls.text_node({"}"})
+      }),
+      -- Superscript
+      ls.snippet("sup", {
+          ls.insert_node(1),
+          ls.text_node({"^{"}),
+          ls.insert_node(2),
+          ls.text_node({"}"})
+      }),
+      -- Inline math
+      ls.snippet("im", {
+          ls.text_node({"$"}),
+          ls.insert_node(1),
+          ls.text_node({"$"})
+      }),
+      -- Display math
+      ls.snippet("dm", {
+          ls.text_node({"\\[ "}),
+          ls.insert_node(1),
+          ls.text_node({" \\]"})
+      }),
+      -- Vectors
+      ls.snippet("vec", {
+          ls.text_node({"\\vec{"}),
+          ls.insert_node(1),
+          ls.text_node({"}"})
+      }),
+      -- Matrices
+      ls.snippet("mat", {
+          ls.text_node({"\\begin{bmatrix}"}),
+          ls.insert_node(1),
+          ls.text_node({"\\end{bmatrix}"})
+      }),
+      -- Bra–ket
+      ls.snippet("ket", {
+          ls.text_node({"\\lvert "}),
+          ls.insert_node(1),
+          ls.text_node({" \\rangle"})
+      }),
+      ls.snippet("bra", {
+          ls.text_node({"\\langle "}),
+          ls.insert_node(1),
+          ls.text_node({" \\rvert"})
+      }),
+      ls.snippet("braket", {
+          ls.text_node({"\\langle "}),
+          ls.insert_node(1),
+          ls.text_node({" \\vert "}),
+          ls.insert_node(2),
+          ls.text_node({" \\rangle"})
+      }),
+      -- Greek letters
+      ls.snippet("al", { ls.text_node("\\alpha") }),
+      ls.snippet("be", { ls.text_node("\\beta") }),
+      ls.snippet("ga", { ls.text_node("\\gamma") }),
+      ls.snippet("de", { ls.text_node("\\delta") }),
+      ls.snippet("ep", { ls.text_node("\\epsilon") }),
+      ls.snippet("la", { ls.text_node("\\lambda") }),
+      ls.snippet("mu", { ls.text_node("\\mu") }),
+      ls.snippet("si", { ls.text_node("\\sigma") }),
+      ls.snippet("th", { ls.text_node("\\theta") }),
+  })
+  
+  -- Prioritise custom snippets 
+  ls.add_snippets("tex", ls.snippets.tex, { override = true }) 
+
+  -- nvim-cmp setup with LuaSnip for LaTeX
   local cmp = require("cmp")
-  local luasnip = require("luasnip")
-
-  cmp.setup {
-    snippet = {
-      expand = function(args) luasnip.lsp_expand(args.body) end,
+  
+  cmp.setup({
+      snippet = {
+          expand = function(args)
+              ls.lsp_expand(args.body)  -- Expand LuaSnip snippets
+          end,
+      },
+      mapping = cmp.mapping.preset.insert({
+          ["<C-Space>"] = cmp.mapping.complete(),   -- Trigger completion manually
+          ["<CR>"] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item
+          ["<Tab>"] = cmp.mapping(function(fallback)
+              if cmp.visible() then
+                  cmp.select_next_item()
+              elseif ls.expand_or_jumpable() then
+                  ls.expand_or_jump()
+              else
+                  fallback()
+              end
+          end, { "i", "s" }),
+          
+          ["<S-Tab>"] = cmp.mapping(function(fallback)
+              if cmp.visible() then
+                  cmp.select_prev_item()
+              elseif ls.jumpable(-1) then
+                  ls.jump(-1)
+              else
+                  fallback()
+              end
+          end, { "i", "s" }),      
+      }),
+      sources = cmp.config.sources({
+          { name = "nvim_lsp" },    -- LSP completions
+          { name = "luasnip" },     -- Snippet completions
+          { name = "buffer" },      -- Words from open buffers
+          { name = "path" },        -- File path completions
+      }),
+      completion = {
+          completeopt = "menu,menuone,noinsert",  -- How completion menu behaves
+          keyword_length = 2,                     -- Trigger after 2 chars
+      },
+      formatting = {
+          format = function(entry, vim_item)
+              vim_item.menu = ({
+                  nvim_lsp = "[LSP]",
+                  luasnip = "[Snip]",
+                  buffer = "[Buf]",
+                  path = "[Path]",
+            })[entry.source.name]
+            return vim_item
+        end,
     },
-    mapping = cmp.mapping.preset.insert({
-      ["<C-Space>"] = cmp.mapping.complete(),
-      ["<CR>"] = cmp.mapping.confirm { select = true },
-      ["<Tab>"] = cmp.mapping(function(fallback)
-        if cmp.visible() then
-          cmp.select_next_item()
-        elseif luasnip.expand_or_jumpable() then
-          luasnip.expand_or_jump()
-        else
-          fallback()
-        end
-      end, { "i", "s" }),
-      ["<S-Tab>"] = cmp.mapping(function(fallback)
-        if cmp.visible() then
-          cmp.select_prev_item()
-        elseif luasnip.jumpable(-1) then
-          luasnip.jump(-1)
-        else
-          fallback()
-        end
-      end, { "i", "s" }),
-    }),
-    sources = cmp.config.sources({
-      { name = "nvim_lsp" },
-      { name = "luasnip" },
-      { name = "buffer" },
-      { name = "path" },
-    }),
-  }
-
+    experimental = {
+        ghost_text = true,  -- Show preview of completion inline
+    },
+  })
+  
   -- Notify Configuration
   require("notify").setup({
     background_colour = "#000000", -- prevents transparency issues
   })
+
   vim.notify = require("notify")
 
   local notifyOk, notify = pcall(require, "notify")
@@ -229,7 +398,7 @@ vim.schedule(function()
       lsp_doc_border = true, -- adds borders to hover/signature help
     },
   })
-
+  
   -- VimTeX configuration 
   vim.g.vimtex_view_method = 'tdf'           -- Use TDF inside Kitty
   vim.g.vimtex_quickfix_mode = 0             -- Only show quickfix on errors
@@ -249,10 +418,12 @@ vim.schedule(function()
     quiet = 1, 
     autoclose = 1, 
   } 
-
+  
   -- Folding settings (deferred for treesitter)
-  vim.opt.foldmethod = "expr"                            -- Use expression for folding
-  vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"   -- Treesitter folding expression
+  --vim.opt.foldmethod = "expr"                            -- Use expression for folding
+  --vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"   -- Treesitter folding expression
+  vim.opt.foldexpr = "nvim_treesitter#foldexpr()"        -- Treesitter folding expression
   vim.opt.foldlevel = 99                                 -- Keep all folds open by default
   vim.opt.foldlevelstart = 99                            -- Same as above
+  vim.opt.foldenable = true
 end)
