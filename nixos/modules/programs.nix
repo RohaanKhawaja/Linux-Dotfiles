@@ -44,6 +44,7 @@ in
     pavucontrol                        # Volume Control 
     pulseaudioFull                     # Audio Utils  
     efibootmgr                         # EFI Boot Manager 
+    libguestfs			       # Virtual HDD Tool
     kanata                             # Keyboard Remapping 
     openrazer-daemon                   # Razer Hardware Daemon
     libinput                           # Input Library 
@@ -52,6 +53,7 @@ in
     kdePackages.qt6ct                  # QT6 Configuration
     libsForQt5.qt5.qtwayland           # QT5 Wayland 
     kdePackages.qtwayland              # QT6 Wayland
+    kdePackages.ark                    # File Archiver
 
     # Compilers
     gcc                 # C/C++ Compiler

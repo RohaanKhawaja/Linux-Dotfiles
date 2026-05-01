@@ -51,6 +51,7 @@
     swaynotificationcenter              # Notification Utility
     wl-clipboard                        # Clipboard Backend
     cliphist                            # Clipboard History 
+    
   ];
 
 }   

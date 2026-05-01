@@ -66,7 +66,24 @@ vim.opt.path:append("**")                          -- include subdirectories in 
 vim.opt.selection = "exclusive"                    -- Selection behavior
 vim.opt.mouse = "a"                                -- Enable mouse support
 vim.opt.modifiable = true                          -- Allow buffer modifications
-vim.opt.clipboard = "unnamedplus"                  -- Use System clipboard
+
+-- Clipboard Settings
+vim.opt.clipboard = "unnamedplus"                  -- Use System clipboard (for WSL)
+-- wl-clipboard for nixos
+--vim.env.XDG_RUNTIME_DIR = "/run/user/1000"
+--vim.env.WAYLAND_DISPLAY = "wayland-1"
+--vim.g.clipboard = {
+  --name = "wl-clipboard",
+  --copy = {
+    --["+"] = { "wl-copy", "--foreground", "--type", "text/plain" },
+    --["*"] = { "wl-copy", "--foreground", "--type", "text/plain" },
+  --},
+  --paste = {
+    --["+"] = { "wl-paste", "--no-newline" },
+    --["*"] = { "wl-paste", "--no-newline" },
+  --},
+  --cache_enabled = 2
+--}
 
 -- Cursor Settings (solid block = normal, solid line = visual, blinking line = insert) 
 vim.o.guicursor = table.concat({
@@ -142,6 +159,21 @@ vim.api.nvim_create_autocmd("FileType", {
   end,
 })
 
+-- Save folds on close
+--vim.opt.viewoptions = "folds,cursor"
+--
+--vim.api.nvim_create_autocmd("BufWinLeave", {
+  --callback = function()
+    --vim.cmd("mkview")
+  --end,
+--})
+--
+--vim.api.nvim_create_autocmd("BufWinEnter", {
+  --callback = function()
+    --vim.cmd("silent! loadview")
+  --end,
+--})
+
 -- Plugins Configuration (deferred until after startup)
 vim.schedule(function()
   -- Theme
@@ -186,15 +218,21 @@ vim.schedule(function()
   require("which-key").setup {}
 
   -- LSP configs
-  require("lspconfig").clangd.setup {}
-  require("lspconfig").pyright.setup {}
-  require("lspconfig").jdtls.setup {}
-  require("lspconfig").texlab.setup {}
+  --require("lspconfig").clangd.setup {}
+  --require("lspconfig").pyright.setup {}
+  --require("lspconfig").jdtls.setup {}
+  --require("lspconfig").texlab.setup {}
+  local servers = { "clangd", "pyright", "texlab" }
+
+  for _, server in ipairs(servers) do
+    vim.lsp.config(server, {})
+    vim.lsp.enable(server)
+  end
 
   local ls = require("luasnip")
   
   -- Optional: load vscode-style snippets (like friendly-snippets)
-  require("luasnip.loaders.from_vscode").lazy_load()
+  --("luasnip.loaders.from_vscode").lazy_load()
   
   -- Define snippets manually
   ls.snippets = ls.snippets or {}  -- ensure the table exists
@@ -299,6 +337,246 @@ vim.schedule(function()
       ls.snippet("mu", { ls.text_node("\\mu") }),
       ls.snippet("si", { ls.text_node("\\sigma") }),
       ls.snippet("th", { ls.text_node("\\theta") }),
+      -- Paragraph 
+      ls.snippet("par", {
+      ls.text_node("\\paragraph{"),
+      ls.insert_node(1),
+      ls.text_node({"}", ""}),
+      ls.insert_node(0),
+      }),
+      -- Subparagraph
+      ls.snippet("spar", {
+      ls.text_node("\\subparagraph{"),
+      ls.insert_node(1),
+      ls.text_node({"}", ""}),
+      ls.insert_node(0),
+      }),
+      -- Section
+      ls.snippet("sec", {
+      ls.text_node("\\section{"),
+      ls.insert_node(1),
+      ls.text_node({"}", ""}),
+      ls.insert_node(0),
+      }),
+      -- Subsection
+      ls.snippet("ss", {
+      ls.text_node("\\subsection{"),
+      ls.insert_node(1),
+      ls.text_node({"}", ""}),
+      ls.insert_node(0),
+      }),
+      -- Subsubsection
+      ls.snippet("sss", {
+      ls.text_node("\\subsubsection{"),
+      ls.insert_node(1),
+      ls.text_node({"}", ""}),
+      ls.insert_node(0),
+      }),
+      -- Subitem 
+      ls.snippet("sitem", {
+      ls.text_node({ "", "\\subitem " }),
+      ls.insert_node(1),
+      ls.insert_node(0),
+      }),
+      -- Itemize 
+      ls.snippet("item", {
+      ls.text_node({"\\begin{itemize}", "\t\\item "}),
+      ls.insert_node(1),
+      ls.text_node({"", "\\end{itemize}"}),
+      ls.insert_node(0),
+      }),
+      -- Single item
+      ls.snippet("it", {
+      ls.text_node({ "", "\\item " }),
+      ls.insert_node(1),
+      ls.insert_node(0),
+      }),
+      -- Label
+      ls.snippet("lab", {
+          ls.text_node({"\\label{"}),
+          ls.insert_node(1, "eq:"),
+          ls.text_node({"}"}),
+      }),
+      -- Reference
+      ls.snippet("ref", {
+          ls.text_node({"\\ref{"}),
+          ls.insert_node(1),
+          ls.text_node({"}"}),
+      }),
+      -- Equation reference
+      ls.snippet("eqref", {
+          ls.text_node({"\\eqref{"}),
+          ls.insert_node(1),
+          ls.text_node({"}"}),
+      }),
+      -- Bold text
+      ls.snippet("bf", {
+          ls.text_node({"\\textbf{"}),
+          ls.insert_node(1),
+          ls.text_node({"}"}),
+      }),
+      -- Italic text
+      ls.snippet("itx", {
+          ls.text_node({"\\textit{"}),
+          ls.insert_node(1),
+          ls.text_node({"}"}),
+      }),
+      -- Colour text
+      ls.snippet("col", {
+          ls.text_node({"\\textcolor{"}),
+          ls.insert_node(1, "red"),
+          ls.text_node({"}{"}),
+          ls.insert_node(2),
+          ls.text_node({"}"}),
+      }),
+      -- Highlight colour box
+      ls.snippet("hl", {
+          ls.text_node({"\\colorbox{"}),
+          ls.insert_node(1, "yellow"),
+          ls.text_node({"}{"}),
+          ls.insert_node(2),
+          ls.text_node({"}"}),
+      }),
+      -- Align environment (unnumbered)
+      ls.snippet("aln", {
+          ls.text_node({"\\begin{align*}", "\t"}),
+          ls.insert_node(1),
+          ls.text_node({"", "\\end{align*}"}),
+      }),
+      -- Align environment (numbered)
+      ls.snippet("alnn", {
+          ls.text_node({"\\begin{align}", "\t"}),
+          ls.insert_node(1),
+          ls.text_node({"", "\\end{align}"}),
+      }),
+      -- Cases
+      ls.snippet("cases", {
+          ls.text_node({"\\begin{cases}", "\t"}),
+          ls.insert_node(1),
+          ls.text_node({"", "\\end{cases}"}),
+      }),
+      -- Figure
+      ls.snippet("fig", {
+          ls.text_node({
+              "\\begin{figure}[h]",
+              "\t\\centering",
+              "\t\\includegraphics[width=0.8\\textwidth]{"
+          }),
+          ls.insert_node(1, "file"),
+          ls.text_node({"}", "\t\\caption{"}),
+          ls.insert_node(2),
+          ls.text_node({"}", "\t\\label{"}),
+          ls.insert_node(3, "fig:"),
+          ls.text_node({"}", "\\end{figure}"}),
+      }),
+      -- Itemize
+      ls.snippet("itemize", {
+          ls.text_node({"\\begin{itemize}", "\t\\item "}),
+          ls.insert_node(1),
+          ls.text_node({"", "\\end{itemize}"}),
+      }),
+      -- Enumerate
+      ls.snippet("enum", {
+          ls.text_node({"\\begin{enumerate}", "\t\\item "}),
+          ls.insert_node(1),
+          ls.text_node({"", "\\end{enumerate}"}),
+      }),
+      -- Parentheses
+      ls.snippet("lr", {
+          ls.text_node({"\\left( "}),
+          ls.insert_node(1),
+          ls.text_node({" \\right)"}),
+      }),
+      -- Square brackets
+      ls.snippet("lsq", {
+          ls.text_node({"\\left[ "}),
+          ls.insert_node(1),
+          ls.text_node({" \\right]"}),
+      }),
+      -- Absolute value
+      ls.snippet("abs", {
+          ls.text_node({"\\left| "}),
+          ls.insert_node(1),
+          ls.text_node({" \\right|"}),
+      }),
+      -- Limit
+      ls.snippet("lim", {
+          ls.text_node({"\\lim_{"}),
+          ls.insert_node(1, "n \\to \\infty"),
+          ls.text_node({"} "}),
+          ls.insert_node(2),
+      }),
+      -- Small Sum
+      ls.snippet("sumsmall", {
+          ls.text_node({"\\sum_{"}),
+          ls.insert_node(1, "i=1"),
+          ls.text_node({"}^{"}),
+          ls.insert_node(2, "n"),
+          ls.text_node({"} "}),
+          ls.insert_node(3),
+      }),
+      -- Integral
+      ls.snippet("int", {
+          ls.text_node({"\\int_{"}),
+          ls.insert_node(1),
+          ls.text_node({"}^{"}),
+          ls.insert_node(2),
+          ls.text_node({"} "}),
+          ls.insert_node(3),
+          ls.text_node({" \\, d"}),
+          ls.insert_node(4, "x"),
+      }),
+      -- Table
+      ls.snippet("tab", {
+          ls.text_node({
+              "\\begin{table}[h]",
+              "\t\\centering",
+              "\t\\begin{tabular}{"
+          }),
+          ls.insert_node(1, "c"),
+          ls.text_node({"}",
+              "\t\t"
+          }),
+          ls.insert_node(2),
+          ls.text_node({
+              "",
+              "\t\\end{tabular}",
+              "\t\\caption{"
+          }),
+          ls.insert_node(3),
+          ls.text_node({
+              "}",
+              "\t\\label{tab:"
+          }),
+          ls.insert_node(4),
+          ls.text_node({
+              "}",
+              "\\end{table}"
+          }),
+      }),
+      -- Large sum
+      ls.snippet("sum", {
+          ls.text_node({"\\displaystyle \\sum_{"}),
+          ls.insert_node(1, "i=1"),
+          ls.text_node({"}^{"}),
+          ls.insert_node(2, "n"),
+          ls.text_node({"}\\; "}),
+          ls.insert_node(3),
+      }),
+      -- Large Fraction
+      ls.snippet("frac", {
+          ls.text_node({"\\displaystyle \\frac{"}),
+          ls.insert_node(1),
+          ls.text_node({"}{"}),
+          ls.insert_node(2),
+          ls.text_node({"}"}),
+      }),
+      -- Small fraction
+      ls.snippet("fracsmall", {
+          ls.insert_node(1),
+          ls.text_node({" / "}),
+          ls.insert_node(2),
+      }),
   })
   
   -- Prioritise custom snippets 
@@ -427,3 +705,4 @@ vim.schedule(function()
   vim.opt.foldlevelstart = 99                            -- Same as above
   vim.opt.foldenable = true
 end)
+
