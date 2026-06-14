@@ -82,7 +82,7 @@ vim.opt.clipboard = "unnamedplus"                  -- Use System clipboard (for 
     --["+"] = { "wl-paste", "--no-newline" },
     --["*"] = { "wl-paste", "--no-newline" },
   --},
-  --cache_enabled = 2
+  --cache_enabled = 1
 --}
 
 -- Cursor Settings (solid block = normal, solid line = visual, blinking line = insert) 
